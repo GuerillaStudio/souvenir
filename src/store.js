@@ -9,6 +9,10 @@ export default new Vuex.Store({
     timer: {
       selected: 2,
       list: [2, 3, 5]
+    },
+    capturing: {
+      status: false,
+      state: 0
     }
   },
   mutations: {
@@ -17,6 +21,15 @@ export default new Vuex.Store({
     },
     updateTimer (store, time) {
       store.timer.selected = time
+    },
+    startCapture (store) {
+      store.capturing.status = true
+    },
+    stopCapture (store) {
+      store.capturing.status = false
+    },
+    updateCaptureState (store, percent) {
+      store.capturing.state = percent
     }
   },
   actions: {

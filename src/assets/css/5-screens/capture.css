@@ -46,11 +46,21 @@
   margin-right: 1.5rem;
 }
 
+/* Progress bar
+-------------------------------------------------------------- */
+
+.capture-progress {
+  display: flex;
+  align-items: center;
+  height: 11rem;
+}
+
 /* Capture button
 -------------------------------------------------------------- */
 
 .capture-btn,
 .capture-btn:visited {
+  position: relative;
   align-self: center;
   margin-top: auto;
   margin-bottom: 4rem;
@@ -63,8 +73,6 @@
   box-shadow: 2px 4px 15px rgba(0, 0, 0, .25);
   font-size: 0;
   cursor: pointer;
-
-  user-select: none;
 }
 
 .capture-btn:active {
@@ -72,8 +80,38 @@
   box-shadow: none;
 }
 
-
 .capture-btn:focus {
   outline: none;
   box-shadow: var(--focus-ring);
+}
+
+/* Capturing state */
+
+
+.capture-btn--capturing {
+  position: relative;
+  background: linear-gradient(135deg, #212045 0%, #3633a0 100%);
+}
+
+.capture-btn--capturing::after {
+  position: absolute;
+  top: calc(50% - (6rem / 2));
+  left: calc(50% - (6rem / 2));
+  display: block;
+  width: 6rem;
+  height: 6rem;
+  border: .2rem solid transparent;
+  border-color: transparent transparent rgba(255, 255, 255, .8) rgba(255, 255, 255, .8);
+  border-radius: 42rem;
+  content: "";
+  animation: captureSpinAround 1000ms infinite linear;
+}
+
+@keyframes captureSpinAround {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }
