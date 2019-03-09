@@ -8,12 +8,17 @@
         <li class="welcome-steps__item">Save as a GIF</li>
       </ol>
     </div>
-    <button class="btn btn--primary">Start Capturing</button>
+    <button class="btn btn--primary" @click="welcome">Start Capturing</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'welcome'
+  name: 'welcome',
+  methods: {
+    welcome () {
+      this.$store.commit('welcome', true)
+    }
+  }
 }
 </script>
