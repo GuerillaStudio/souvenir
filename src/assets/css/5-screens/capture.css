@@ -7,44 +7,6 @@
   flex-direction: column;
   flex-grow: 1;
 }
-/* Options
--------------------------------------------------------------- */
-
-.capture-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2.2rem 0;
-}
-
-.capture-options__select,
-.capture-options__switch {
-  padding: 2rem;
-  border: .1rem solid transparent;
-  border-radius: .3rem;
-  background: transparent;
-  color: #fff;
-  line-height: 2.2rem;
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.capture-options__select:focus,
-.capture-options__switch:focus {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-.capture-options__select {
-  padding-right: 4.4rem;
-  background: url("/img/ico-arrow.svg") no-repeat;
-  background-position: calc(100% - 2rem) center;
-}
-
-.capture-options__switch svg {
-  margin-right: 1.5rem;
-}
 
 /* Progress bar
 -------------------------------------------------------------- */

@@ -1,0 +1,15 @@
+/* ----------------------------------------------------------- */
+/* == Download screen */
+/* ----------------------------------------------------------- */
+
+.download {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.download-btn,
+.download-btn:visited {
+  margin-top: auto;
+  margin-bottom: 4rem;
+}

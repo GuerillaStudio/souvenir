@@ -16,6 +16,9 @@ export default new Vuex.Store({
     },
     encoding: {
       status: false
+    },
+    downloading: {
+      status: false
     }
   },
   mutations: {
@@ -39,6 +42,12 @@ export default new Vuex.Store({
     },
     stopEncoding (store) {
       store.encoding.status = false
+    },
+    startDownloading (store) {
+      store.downloading.status = true
+    },
+    stopDownloading (store) {
+      store.downloading.status = false
     }
   },
   actions: {

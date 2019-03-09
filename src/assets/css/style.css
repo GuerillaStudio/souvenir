@@ -30,6 +30,7 @@
 /* == modules */
 /* ----------------------------------------------------------- */
 
+@import "4-modules/options.css";
 @import "4-modules/preview.css";
 @import "4-modules/progress-bar.css";
 @import "4-modules/encoding.css";
@@ -40,6 +41,7 @@
 
 @import "5-screens/welcome.css";
 @import "5-screens/capture.css";
+@import "5-screens/download.css";
 
 /* ----------------------------------------------------------- */
 /* == helpers */

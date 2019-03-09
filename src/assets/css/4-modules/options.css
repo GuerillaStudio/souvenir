@@ -1,0 +1,43 @@
+/* ----------------------------------------------------------- */
+/* == Options bar module */
+/* ----------------------------------------------------------- */
+
+
+/* Options
+-------------------------------------------------------------- */
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.2rem 0;
+}
+
+.options__select,
+.options__btn {
+  padding: 2rem;
+  border: .1rem solid transparent;
+  border-radius: .3rem;
+  background: transparent;
+  color: #fff;
+  line-height: 2.2rem;
+  cursor: pointer;
+
+  appearance: none;
+}
+
+.options__select:focus,
+.options__btn:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.options__select {
+  padding-right: 4.4rem;
+  background: url("/img/ico-arrow.svg") no-repeat;
+  background-position: calc(100% - 2rem) center;
+}
+
+.options__btn svg {
+  margin-right: 1.5rem;
+}

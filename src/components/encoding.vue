@@ -29,6 +29,7 @@ export default {
     this.makeLoading()
     window.setTimeout(() => {
       this.$store.commit('stopEncoding')
+      this.$store.commit('startDownloading')
     }, 2000)
   },
   destroyed: function () {

@@ -4,21 +4,23 @@
 
 .preview {
   position: relative;
+  overflow: hidden;
   margin-bottom: 2rem;
+  border-radius: .5rem;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 .4rem 5rem rgba(0, 0, 0, .5);
 }
 
 .preview-visual {
   position: relative;
   width: 100%;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, .5);
-  box-shadow: 0px 4px 50px rgba(0, 0, 0, .5);
 }
 
 .preview::after {
   position: absolute;
   top: calc(50% - (3em / 2));
   left: calc(50% - (3em / 2));
+  z-index: -1;
   display: block;
   width: 3em;
   height: 3em;
