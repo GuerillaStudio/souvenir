@@ -1,3 +1,21 @@
 /* ----------------------------------------------------------- */
 /* == custom fonts */
 /* ----------------------------------------------------------- */
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Roboto";
+  src: url("/fonts/Roboto.woff") format("woff"), local("Roboto");
+
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: bold;
+  font-style: normal;
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-bold.woff") format("woff"), local("Roboto");
+
+  font-display: swap;
+}

@@ -6,6 +6,9 @@ body {
   background: var(--color-tertiary) url("/img/dotgrid.png");
   color: var(--color-light-text);
   font-family: var(--fontstack);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
