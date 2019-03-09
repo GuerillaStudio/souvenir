@@ -3,6 +3,9 @@
 /* ----------------------------------------------------------- */
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: var(--color-tertiary) url("/img/dotgrid.png");
   color: var(--color-light-text);
   font-family: var(--fontstack);

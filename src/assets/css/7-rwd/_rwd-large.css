@@ -2,5 +2,5 @@
 /* == rwd -> large */
 /* ----------------------------------------------------------- */
 
-@media (min-width: var(--rwd-large)) {
+@media (min-width: 1280px) {
 }

@@ -2,5 +2,13 @@
 /* == rwd -> small */
 /* ----------------------------------------------------------- */
 
-@media (min-width: var(--rwd-small)) {
+@media (min-width: 768px) {
+  .welcome {
+    justify-content: center;
+  }
+
+  .welcome-about {
+    margin-top: 0;
+    margin-bottom: 4rem;
+  }
 }

@@ -1,0 +1,64 @@
+/**
+* Button Module
+* namespace : .btn
+*/
+
+/* ----------------------------------------------------------- */
+/* == configuration */
+/* ----------------------------------------------------------- */
+
+:root {
+  --btn-primary: var(--color-primary);
+  --btn-secondary: var(--color-secondary);
+  --btn-radius: 4.2rem;
+}
+
+/* ----------------------------------------------------------- */
+/* == module */
+/* ----------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  padding: .8em 1.6em;
+  border: none;
+  border-radius: var(--btn-radius);
+  background-color: var(--btn-primary);
+  box-shadow: none;
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none !important;
+  line-height: normal;
+  cursor: pointer;
+  transition: background .4s;
+}
+
+.btn:active,
+.btn:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* colors
+-------------------------------------------------------------- */
+
+.btn--primary,
+.btn--primary:link,
+.btn--primary:visited {
+  background: linear-gradient(116.15deg, var(--btn-primary) 0%, var(--btn-secondary) 100%);
+  background-color: var(--btn-primary);
+  color: #fff;
+}
+
+.btn--primary:hover,
+.btn--primary:active,
+.btn--primary:focus {
+  background: var(--btn-primary);
+}
+
+/* size
+-------------------------------------------------------------- */
+
+.btn--big {
+  font-size: calc(var(--base-font) + .4em);
+}

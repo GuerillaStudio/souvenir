@@ -10,19 +10,9 @@
 -------------------------------------------------------------- */
 
 :root {
-  --base-font: 14; /* px value (without unit), will be converted in em */
+  --base-font: 16; /* px value (without unit), will be converted in em */
   --line-height: 1.5;
   --fontstack: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-/* responsive
--------------------------------------------------------------- */
-
-:root {
-  --rwd-xsmall: 480px;
-  --rwd-small: 768px;
-  --rwd-medium: 960px;
-  --rwd-large: 1280px;
 }
 
 /* focus ring

@@ -1,0 +1,36 @@
+/* ----------------------------------------------------------- */
+/* == Welcome screen */
+/* ----------------------------------------------------------- */
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 4rem 2rem;
+}
+
+.welcome-about {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+.welcome-title {
+  margin-bottom: 6rem;
+  font-weight: normal;
+  font-size: 2.4rem;
+  line-height: 1.3em;
+}
+
+.welcome-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  color: rgba(255, 255, 255, .7);
+}
+
+.welcome-steps__item {
+  margin: .5rem 0;
+}

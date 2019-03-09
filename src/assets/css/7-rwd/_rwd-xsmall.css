@@ -2,5 +2,5 @@
 /* == rwd -> xsmall */
 /* ----------------------------------------------------------- */
 
-@media (min-width: var(--rwd-xsmall)) {
+@media (min-width: 480px) {
 }

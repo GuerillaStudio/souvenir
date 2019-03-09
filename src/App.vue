@@ -1,13 +1,17 @@
 <template>
-  <div class="container">
-    <h1 class="txtcenter">Souvenir</h1>
+  <div class="layout">
+    <welcome-screen/>
   </div>
 </template>
 
 <script>
 
+import welcomeScreen from '@/views/welcome'
 export default {
-  name: 'souvenir'
+  name: 'souvenir',
+  components: {
+    welcomeScreen
+  }
 }
 </script>
 
