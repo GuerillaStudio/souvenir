@@ -1,0 +1,59 @@
+/* ----------------------------------------------------------- */
+/* == main */
+/* ----------------------------------------------------------- */
+
+body {
+  background-color: #fff;
+  color: var(--color-dark-text);
+  font-family: var(--fontstack);
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  max-width: 102.4rem;
+}
+
+/* titles
+-------------------------------------------------------------- */
+
+/* links
+-------------------------------------------------------------- */
+
+a,
+a:visited {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: none;
+  border-radius: .3rem;
+  box-shadow: var(--focus-ring);
+}
+
+/* lists
+-------------------------------------------------------------- */
+
+ul {
+  padding-left: 2rem;
+  list-style-type: disc;
+}
+
+/* divers
+-------------------------------------------------------------- */
+
+hr {
+  display: block;
+  margin: 1em 0;
+  padding: 0;
+  height: .1rem;
+  border: 0;
+  border-top: .1rem solid #ccc;
+}

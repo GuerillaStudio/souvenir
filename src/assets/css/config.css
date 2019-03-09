@@ -1,0 +1,33 @@
+/* ----------------------------------------------------------- */
+/* == config */
+/* ----------------------------------------------------------- */
+
+:root {
+  --main-bg-color: brown;
+}
+
+/* base
+-------------------------------------------------------------- */
+
+:root {
+  --base-font: 14; /* px value (without unit), will be converted in em */
+  --line-height: 1.5;
+  --fontstack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* responsive
+-------------------------------------------------------------- */
+
+:root {
+  --rwd-xsmall: 480px;
+  --rwd-small: 768px;
+  --rwd-medium: 960px;
+  --rwd-large: 1280px;
+}
+
+/* focus ring
+-------------------------------------------------------------- */
+
+:root {
+  --focus-ring: 0 0 0 .3rem rgba(33, 133, 208, .5);
+}
