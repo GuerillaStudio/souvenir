@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="capture-options">
-    <select class="capture-options__select" v-model="timer.selected" @change="updateTimer(timer.selected)">
+    <select class="capture-options__select" v-model="timer.selected" @change="updateTimer(timer.selected)" :disabled="encoding.status">
       <option v-for="time in timer.list" :key="time" :value="time">
-      {{ timeLabel(time) }}
+        {{ timeLabel(time) }}
       </option>
     </select>
-    <button class="capture-options__switch" @click="back"><icon-switch/>switch</button>
+    <button class="capture-options__switch" @click="back" :disabled="encoding.status"><icon-switch/>switch</button>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'timer'
+      'timer',
+      'encoding'
     ])
   },
   methods: {

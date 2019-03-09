@@ -13,6 +13,9 @@ export default new Vuex.Store({
     capturing: {
       status: false,
       state: 0
+    },
+    encoding: {
+      status: false
     }
   },
   mutations: {
@@ -30,6 +33,12 @@ export default new Vuex.Store({
     },
     updateCaptureState (store, percent) {
       store.capturing.state = percent
+    },
+    startEncoding (store) {
+      store.encoding.status = true
+    },
+    stopEncoding (store) {
+      store.encoding.status = false
     }
   },
   actions: {

@@ -11,12 +11,14 @@
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click="startCapture">Capture</button>
 
+    <encoding-overlay v-if="encoding.status"/>
   </div>
 </template>
 
 <script>
 import captureOptions from '@/components/capture-options'
 import captureProgress from '@/components/capture-progress'
+import encodingOverlay from '@/components/encoding'
 
 import { mapState } from 'vuex'
 
@@ -24,12 +26,14 @@ export default {
   name: 'capture',
   components: {
     captureOptions,
-    captureProgress
+    captureProgress,
+    encodingOverlay
   },
   computed: {
     ...mapState([
       'capturing',
-      'timer'
+      'timer',
+      'encoding'
     ])
   },
   methods: {
@@ -45,6 +49,8 @@ export default {
         } else {
           window.clearInterval(fakeProgress)
           this.$store.commit('stopCapture')
+          this.$store.commit('updateCaptureState', 0)
+          this.$store.commit('startEncoding')
         }
       }, interval)
     }
