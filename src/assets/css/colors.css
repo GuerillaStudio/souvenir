@@ -6,9 +6,9 @@
 -------------------------------------------------------------- */
 
 :root {
-  --color-primary: #3498db;
-  --color-secondary: #1abc9c;
-  --color-tertiary: #34495e;
+  --color-primary: #dd28d3;
+  --color-secondary: #8420a7;
+  --color-tertiary: #212045;
   --color-info: #2185d0;
 }
 
@@ -17,7 +17,7 @@
 
 :root {
   --color-light-text: #fcfcfc;
-  --color-dark-text: #000;
+  --color-dark-text: var(--color-tertiary);
 }
 
 /* links

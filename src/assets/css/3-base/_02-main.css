@@ -3,8 +3,8 @@
 /* ----------------------------------------------------------- */
 
 body {
-  background-color: #fff;
-  color: var(--color-dark-text);
+  background: var(--color-tertiary) url("/img/dotgrid.png");
+  color: var(--color-light-text);
   font-family: var(--fontstack);
 }
 

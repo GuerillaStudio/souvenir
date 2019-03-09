@@ -1,0 +1,38 @@
+/* ----------------------------------------------------------- */
+/* == alignment */
+/* ----------------------------------------------------------- */
+
+/* block
+-------------------------------------------------------------- */
+
+.center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* text/inline
+-------------------------------------------------------------- */
+
+.txtright {
+  text-align: right;
+}
+
+.txtcenter {
+  text-align: center;
+}
+
+.txtleft {
+  text-align: left;
+}
+
+.vtop {
+  vertical-align: top;
+}
+
+.vbottom {
+  vertical-align: bottom;
+}
+
+.vmiddle {
+  vertical-align: middle;
+}
