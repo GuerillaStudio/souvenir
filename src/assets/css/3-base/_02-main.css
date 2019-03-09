@@ -5,6 +5,7 @@
 body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   min-height: 100vh;
   background: var(--color-tertiary) url("/img/dotgrid.png");
   color: var(--color-light-text);

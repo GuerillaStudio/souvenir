@@ -3,6 +3,10 @@
 /* ----------------------------------------------------------- */
 
 @media (min-width: 768px) {
+  .layout {
+    flex-grow: inherit;
+  }
+
   .welcome {
     justify-content: center;
   }
