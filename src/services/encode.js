@@ -21,8 +21,8 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
           break
 
         case 'done':
-          const base64Content = btoa(payload.buffer.map((b) => String.fromCharCode(b)).join(""))
-          const dataUrl = "data:image/gif;base64," + base64Content
+          const base64Content = btoa(payload.buffer.map((b) => String.fromCharCode(b)).join(''))
+          const dataUrl = 'data:image/gif;base64,' + base64Content
           resolve(dataUrl)
           break
       }
