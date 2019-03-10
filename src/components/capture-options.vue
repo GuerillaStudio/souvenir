@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     back () {
-      this.$store.commit('welcome', false)
+      this.$store.commit('updateMediaStream', null)
     },
     timeLabel (time) {
       return time + 's'

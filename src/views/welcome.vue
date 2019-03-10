@@ -17,7 +17,7 @@ export default {
   name: 'welcome',
   methods: {
     welcome () {
-      this.$store.commit('welcome', true)
+      this.$store.dispatch('requestCamera')
     }
   }
 }

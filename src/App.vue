@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
-    <welcome-screen v-if="!welcomed && !downloading.status"/>
-    <capture-screen v-if="welcomed && !downloading.status"/>
+    <welcome-screen v-if="!mediaStream && !downloading.status"/>
+    <capture-screen v-if="mediaStream && !downloading.status"/>
     <download-screen v-if="downloading.status"/>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'welcomed',
+      'mediaStream',
       'downloading'
     ])
   }

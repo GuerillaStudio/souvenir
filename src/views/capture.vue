@@ -6,7 +6,7 @@
     <capture-options v-else/>
 
     <div class="preview">
-      <video class="preview-visual" height="200px"></video>
+      <video ref="preview" class="preview-visual" height="200px" autoplay></video>
     </div>
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click="startCapture">Capture</button>
@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     ...mapState([
+      'mediaStream',
       'capturing',
       'timer',
       'encoding'
@@ -54,6 +55,9 @@ export default {
         }
       }, interval)
     }
-  }
+  },
+  mounted: function () {
+    this.$refs.preview.srcObject = this.mediaStream
+  },
 }
 </script>

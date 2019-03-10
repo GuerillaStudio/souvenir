@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    welcomed: false,
+    mediaStream: null,
     timer: {
       selected: 2,
       list: [2, 3, 5]
@@ -22,8 +22,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    welcome (store, value) {
-      store.welcomed = value
+    updateMediaStream(store, mediaStream) {
+      if (store.mediaStream) {
+        store.mediaStream.getTracks().forEach(track => track.stop())
+      }
+
+      store.mediaStream = mediaStream
     },
     updateTimer (store, time) {
       store.timer.selected = time
@@ -51,6 +55,12 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
+    requestCamera ({ commit }) {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        .then(mediaStream => {
+          commit('updateMediaStream', mediaStream)
+        })
+        .catch(error => console.error(error))
+    }
   }
 })
