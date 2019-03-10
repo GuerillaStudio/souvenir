@@ -39,25 +39,11 @@ export default {
   },
   methods: {
     startCapture () {
-      this.$store.commit('startCapture')
-      this.fakeCapture()
-    },
-    fakeCapture () {
-      const interval = (this.timer.selected * 1000) / 100
-      const fakeProgress = window.setInterval(() => {
-        if (this.capturing.state < 100) {
-          this.$store.commit('updateCaptureState', this.capturing.state + 1)
-        } else {
-          window.clearInterval(fakeProgress)
-          this.$store.commit('stopCapture')
-          this.$store.commit('updateCaptureState', 0)
-          this.$store.commit('startEncoding')
-        }
-      }, interval)
+      this.$store.dispatch('capture')
     }
   },
   mounted: function () {
     this.$refs.preview.srcObject = this.mediaStream
-  },
+  }
 }
 </script>

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { capture } from './services/capture.js'
+import { encode } from './services/encode.js'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -22,7 +25,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    updateMediaStream(store, mediaStream) {
+    updateMediaStream (store, mediaStream) {
       if (store.mediaStream) {
         store.mediaStream.getTracks().forEach(track => track.stop())
       }
@@ -61,6 +64,34 @@ export default new Vuex.Store({
           commit('updateMediaStream', mediaStream)
         })
         .catch(error => console.error(error))
+    },
+    capture ({ commit, dispatch, state }) {
+      commit('startCapture')
+
+      capture(commit, state.mediaStream, state.timer.selected * 1000)
+        .then(captureData => {
+          commit('stopCapture')
+          commit('updateCaptureState', 0)
+          dispatch('encode', captureData)
+        })
+        .catch(error => console.error(error))
+    },
+    encode ({ commit }, captureData) {
+      commit('startEncoding')
+
+      console.log(captureData)
+
+      encode(captureData)
+        .then(clipDataUrl => {
+          commit('stopEncoding')
+          commit('startDownloading')
+          console.log(clipDataUrl)
+        })
+        .catch(error => {
+          console.error(error)
+          commit('stopEncoding')
+          commit('startDownloading')
+        })
     }
   }
 })
