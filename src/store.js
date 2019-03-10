@@ -21,7 +21,8 @@ export default new Vuex.Store({
       status: false
     },
     downloading: {
-      status: false
+      status: false,
+      dataUrl: null
     }
   },
   mutations: {
@@ -50,11 +51,13 @@ export default new Vuex.Store({
     stopEncoding (store) {
       store.encoding.status = false
     },
-    startDownloading (store) {
+    startDownloading (store, dataUrl) {
       store.downloading.status = true
+      store.downloading.dataUrl = dataUrl
     },
     stopDownloading (store) {
       store.downloading.status = false
+      store.downloading.dataUrl = null
     }
   },
   actions: {
@@ -82,16 +85,11 @@ export default new Vuex.Store({
       console.log(captureData)
 
       encode(captureData)
-        .then(clipDataUrl => {
+        .then(dataUrl => {
           commit('stopEncoding')
-          commit('startDownloading')
-          console.log(clipDataUrl)
+          commit('startDownloading', dataUrl)
         })
-        .catch(error => {
-          console.error(error)
-          commit('stopEncoding')
-          commit('startDownloading')
-        })
+        .catch(error => console.error(error))
     }
   }
 })

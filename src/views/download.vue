@@ -6,7 +6,7 @@
     </div>
 
     <div class="preview">
-      <img class="preview-visual" src="https://unsplash.it/320/320" alt="">
+      <img class="preview-visual" :src="downloading.dataUrl" alt="">
     </div>
 
     <button class="download-btn btn btn--primary w100">Download GIF</button>
@@ -14,8 +14,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'download',
+  computed: {
+    ...mapState([
+      'downloading'
+    ])
+  },
   methods: {
     back () {
       this.$store.commit('stopDownloading')

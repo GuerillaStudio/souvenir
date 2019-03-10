@@ -2,7 +2,7 @@ import EncodeWorker from '@/services/encode.worker.js'
 
 const PALETTE_SIZE = 255
 
-export function encode (imageDataList, imageWidth, imageHeight, paletteSize, delayTime) {
+export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
   return new Promise((resolve, reject) => {
     const worker = new EncodeWorker()
 
@@ -21,7 +21,8 @@ export function encode (imageDataList, imageWidth, imageHeight, paletteSize, del
           break
 
         case 'done':
-          const dataUrl = 'data:image/gif;base64,' + btoa(payload.buffer.map((b) => String.fromCharCode(b)).join(''))
+          const base64Content = btoa(payload.buffer.map((b) => String.fromCharCode(b)).join(""))
+          const dataUrl = "data:image/gif;base64," + base64Content
           resolve(dataUrl)
           break
       }
