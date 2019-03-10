@@ -65,7 +65,14 @@ export default new Vuex.Store({
   },
   actions: {
     requestCamera ({ commit }) {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      const constaints = {
+        video: {
+          facingMode: 'user'
+        },
+        audio: false
+      }
+
+      navigator.mediaDevices.getUserMedia(constaints)
         .then(mediaStream => {
           commit('updateMediaStream', mediaStream)
         })
