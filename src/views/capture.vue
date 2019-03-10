@@ -9,7 +9,7 @@
       <video ref="preview" class="preview-visual" height="200px" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
-    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click="startCapture">Capture</button>
+    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture">Capture</button>
 
     <encoding-overlay v-if="encoding.status"/>
   </div>
