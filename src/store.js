@@ -22,7 +22,8 @@ export default new Vuex.Store({
     },
     downloading: {
       status: false,
-      dataUrl: null
+      dataUrl: null,
+      timestamp: null
     }
   },
   mutations: {
@@ -54,10 +55,12 @@ export default new Vuex.Store({
     startDownloading (store, dataUrl) {
       store.downloading.status = true
       store.downloading.dataUrl = dataUrl
+      store.downloading.timestamp = Date.now()
     },
     stopDownloading (store) {
       store.downloading.status = false
       store.downloading.dataUrl = null
+      store.downloading.timestamp = null
     }
   },
   actions: {

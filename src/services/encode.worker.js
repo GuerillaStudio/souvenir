@@ -5,7 +5,6 @@ import {
 } from 'gif-writer'
 
 onmessage = (event) => {
-  console.log(event.data)
   const { imageDataList, imageWidth, imageHeight, paletteSize, delayTime } = event.data
 
   console.log('Write GIF')

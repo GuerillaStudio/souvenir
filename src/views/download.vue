@@ -9,7 +9,7 @@
       <img class="preview-visual" :src="downloading.dataUrl" alt="">
     </div>
 
-    <button class="download-btn btn btn--primary w100">Download GIF</button>
+    <a class="download-btn btn btn--primary w100" :href="downloading.dataUrl" :download="`souvenir${downloading.timestamp}.gif`">Download GIF</a>
   </div>
 </template>
 

@@ -7,7 +7,6 @@ const FRAMES_PER_SECOND = 10
 const WIDTH = 200
 const HEIGHT = WIDTH
 
-
 export function capture (commit, mediaStream, duration) {
   return new Promise((resolve, reject) => {
     const video = document.createElement('video')
