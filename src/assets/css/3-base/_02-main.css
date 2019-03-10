@@ -45,7 +45,6 @@ a:hover {
 
 a:focus {
   outline: none;
-  border-radius: .3rem;
   box-shadow: var(--focus-ring);
 }
 

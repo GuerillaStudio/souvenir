@@ -6,7 +6,7 @@
     <capture-options v-else/>
 
     <div class="preview">
-      <video ref="preview" class="preview-visual" height="200px" autoplay></video>
+      <video ref="preview" class="preview-visual" height="200px" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click="startCapture">Capture</button>
