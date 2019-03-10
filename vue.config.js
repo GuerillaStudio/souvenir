@@ -10,16 +10,10 @@ module.exports = {
     }
   },
   parallel: false,
-  configureWebpack: {
-    module: {
-      rules: [
-        {
-          test: /\.worker\.js$/,
-          use: {
-            loader: 'worker-loader'
-          }
-        }
-      ]
-    }
+  chainWebpack: (config) => {
+    config.module.rule('worker')
+      .test(/\.worker\.js$/i)
+      .use('worker-loader')
+      .loader('worker-loader')
   }
 }
