@@ -9,6 +9,7 @@ module.exports = {
       importWorkboxFrom: 'local'
     }
   },
+  parallel: false,
   configureWebpack: {
     module: {
       rules: [

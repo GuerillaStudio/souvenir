@@ -1,7 +1,7 @@
 import {
   makeRectangle,
   crop
-} from './rectangle.js'
+} from '@/services/rectangle.js'
 
 const FRAMES_PER_SECOND = 10
 const WIDTH = 200

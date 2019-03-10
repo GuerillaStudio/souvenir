@@ -1,4 +1,4 @@
-import EncodeWorker from './encode.worker.js'
+import EncodeWorker from '@/services/encode.worker.js'
 
 const PALETTE_SIZE = 255
 
