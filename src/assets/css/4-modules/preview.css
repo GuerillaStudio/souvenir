@@ -11,11 +11,6 @@
   box-shadow: 0 .4rem 5rem rgba(0, 0, 0, .5);
 }
 
-.preview-visual {
-  position: relative;
-  width: 100%;
-}
-
 .preview::after {
   position: absolute;
   top: calc(50% - (3em / 2));
@@ -38,4 +33,12 @@
   100% {
     transform: rotate(359deg);
   }
+}
+
+.preview-visual {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  width: 35rem;
+  height: 100%;
 }
