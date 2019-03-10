@@ -22,7 +22,7 @@ export default new Vuex.Store({
     },
     downloading: {
       status: false,
-      dataUrl: null,
+      objectUrl: null,
       timestamp: null
     }
   },
@@ -52,14 +52,18 @@ export default new Vuex.Store({
     stopEncoding (store) {
       store.encoding.status = false
     },
-    startDownloading (store, dataUrl) {
+    startDownloading (store, objectUrl) {
       store.downloading.status = true
-      store.downloading.dataUrl = dataUrl
+      store.downloading.objectUrl = objectUrl
       store.downloading.timestamp = Date.now()
     },
     stopDownloading (store) {
+      if (store.downloading.objectUrl) {
+        URL.revokeObjectURL(store.downloading.objectUrl)
+      }
+
       store.downloading.status = false
-      store.downloading.dataUrl = null
+      store.downloading.objectUrl = null
       store.downloading.timestamp = null
     }
   },

@@ -21,9 +21,10 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
           break
 
         case 'done':
-          const base64Content = btoa(payload.buffer.map((b) => String.fromCharCode(b)).join(''))
-          const dataUrl = 'data:image/gif;base64,' + base64Content
-          resolve(dataUrl)
+          const byteArray = new Uint8Array(payload.buffer)
+          const blob = new Blob([byteArray], { type: 'image/gif' })
+          const objectUrl = URL.createObjectURL(blob)
+          resolve(objectUrl)
           break
       }
     }

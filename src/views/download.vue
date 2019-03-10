@@ -6,10 +6,10 @@
     </div>
 
     <div class="preview">
-      <img class="preview-visual" :src="downloading.dataUrl" alt="">
+      <img class="preview-visual" :src="downloading.objectUrl" alt="">
     </div>
 
-    <a class="download-btn btn btn--primary w100" :href="downloading.dataUrl" :download="`souvenir${downloading.timestamp}.gif`">Download GIF</a>
+    <a class="download-btn btn btn--primary w100" :href="downloading.objectUrl" :download="`souvenir${downloading.timestamp}.gif`">Download GIF</a>
   </div>
 </template>
 
