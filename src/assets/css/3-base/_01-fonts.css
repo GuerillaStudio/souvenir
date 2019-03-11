@@ -3,19 +3,17 @@
 /* ----------------------------------------------------------- */
 
 @font-face {
+  font-display: swap;
   font-weight: normal;
   font-style: normal;
   font-family: "Roboto";
   src: url("/fonts/Roboto.woff") format("woff"), local("Roboto");
-
-  font-display: swap;
 }
 
 @font-face {
+  font-display: swap;
   font-weight: bold;
   font-style: normal;
   font-family: "Roboto";
   src: url("/fonts/Roboto-bold.woff") format("woff"), local("Roboto");
-
-  font-display: swap;
 }
