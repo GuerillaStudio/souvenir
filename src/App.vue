@@ -1,8 +1,8 @@
-<template>
+<template lang="html">
   <div class="layout">
-    <welcome-screen v-if="!mediaStream && !downloading.status"/>
-    <capture-screen v-if="mediaStream && !downloading.status"/>
-    <download-screen v-if="downloading.status"/>
+    <welcome-screen v-if="!mediaStream && !downloading.status"></welcome-screen>
+    <capture-screen v-if="mediaStream && !downloading.status"></capture-screen>
+    <download-screen v-if="downloading.status"></download-screen>
   </div>
 </template>
 
@@ -29,7 +29,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="css">
 @import '/assets/css/style.css';

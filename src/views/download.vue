@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="download">
     <div class="options">
       <span></span>

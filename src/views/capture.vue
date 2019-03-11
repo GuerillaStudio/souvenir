@@ -1,9 +1,9 @@
-<template>
+<template lang="html">
   <div class="capture">
     <div class="capture-progress" v-if="capturing.status">
-      <capture-progress/>
+      <capture-progress></capture-progress>
     </div>
-    <capture-options v-else/>
+    <capture-options v-else></capture-options>
 
     <div class="preview" ref="previewcontainer">
       <video ref="preview" class="preview-visual" preload="yes" autoplay muted playsinline webkit-playsinline></video>
@@ -11,7 +11,7 @@
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture">Capture</button>
 
-    <encoding-overlay v-if="encoding.status"/>
+    <encoding-overlay v-if="encoding.status"></encoding-overlay>
   </div>
 </template>
 

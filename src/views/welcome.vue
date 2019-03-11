@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="welcome">
     <div class="welcome-about">
       <h1 class="welcome-title">Capture few seconds as a gif for souvenir</h1>

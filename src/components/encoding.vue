@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="encoding">
     Encoding {{ ellipsis }}
   </div>
