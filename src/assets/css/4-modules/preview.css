@@ -6,6 +6,8 @@
   position: relative;
   overflow: hidden;
   margin-bottom: 2rem;
+  max-width: 100%;
+  width: 35rem;
   border-radius: .5rem;
   background-color: rgba(0, 0, 0, .5);
   box-shadow: 0 .4rem 5rem rgba(0, 0, 0, .5);
@@ -36,9 +38,11 @@
 }
 
 .preview-visual {
-  position: relative;
+  position: absolute;
   display: block;
-  max-width: 100%;
-  width: 35rem;
-  height: 100%;
+  max-width: none;
+}
+
+.preview-visualImg {
+  width: 100%;
 }
