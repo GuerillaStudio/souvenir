@@ -8,9 +8,9 @@
 
 <script>
 
-import welcomeScreen from '@/views/welcome'
-import captureScreen from '@/views/capture'
-import downloadScreen from '@/views/download'
+import welcomeScreen from '/views/welcome'
+import captureScreen from '/views/capture'
+import downloadScreen from '/views/download'
 
 import { mapState } from 'vuex'
 
@@ -30,4 +30,7 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/style.css" lang="css"></style>
+
+<style lang="css">
+@import '/assets/css/style.css';
+</style>

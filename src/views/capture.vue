@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import captureOptions from '@/components/capture-options'
-import captureProgress from '@/components/capture-progress'
-import encodingOverlay from '@/components/encoding'
+import captureOptions from '/components/capture-options'
+import captureProgress from '/components/capture-progress'
+import encodingOverlay from '/components/encoding'
 
 import { mapState } from 'vuex'
 

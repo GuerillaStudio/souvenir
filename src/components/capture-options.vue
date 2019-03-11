@@ -12,7 +12,7 @@
 <script>
 import { mapState } from 'vuex'
 
-import iconSwitch from '@/icons/ico-switch'
+import iconSwitch from '/icons/ico-switch'
 
 export default {
   name: 'captureOptions',

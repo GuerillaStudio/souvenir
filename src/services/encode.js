@@ -1,10 +1,10 @@
-import EncodeWorker from '@/services/encode.worker.js'
+// import EncodeWorker from './encode.worker.js'
 
 const PALETTE_SIZE = 255
 
 export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
   return new Promise((resolve, reject) => {
-    const worker = new EncodeWorker()
+    const worker = new Worker('/services/encode.worker.js')
 
     worker.onerror = error => reject(error)
 
@@ -13,7 +13,7 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
 
       switch (type) {
         default:
-          reject(new Error(`Unexpected EncodeWorker message with type ${type}`))
+          reject(new Error(`Unexpected worker message with type ${type}`))
           break
 
         case 'progress':

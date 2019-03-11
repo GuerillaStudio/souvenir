@@ -2,60 +2,60 @@
 /* == config */
 /* ----------------------------------------------------------- */
 
-@import "colors.css";
-@import "config.css";
+@import "/assets/css/colors.css";
+@import "/assets/css/config.css";
 
 /* ----------------------------------------------------------- */
 /* == core */
 /* ----------------------------------------------------------- */
 
-@import "1-core/_00-reset.css";
-@import "1-core/_01-typography.css";
+@import "/assets/css/1-core/_00-reset.css";
+@import "/assets/css/1-core/_01-typography.css";
 
 /* ----------------------------------------------------------- */
 /* == components */
 /* ----------------------------------------------------------- */
 
-@import "2-components/_buttons.css";
+@import "/assets/css/2-components/_buttons.css";
 
 /* ----------------------------------------------------------- */
 /* == base */
 /* ----------------------------------------------------------- */
 
-@import "3-base/_01-fonts.css";
-@import "3-base/_02-main.css";
-@import "3-base/_03-layout.css";
+@import "/assets/css/3-base/_01-fonts.css";
+@import "/assets/css/3-base/_02-main.css";
+@import "/assets/css/3-base/_03-layout.css";
 
 /* ----------------------------------------------------------- */
 /* == modules */
 /* ----------------------------------------------------------- */
 
-@import "4-modules/options.css";
-@import "4-modules/preview.css";
-@import "4-modules/progress-bar.css";
-@import "4-modules/encoding.css";
+@import "/assets/css/4-modules/options.css";
+@import "/assets/css/4-modules/preview.css";
+@import "/assets/css/4-modules/progress-bar.css";
+@import "/assets/css/4-modules/encoding.css";
 
 /* ----------------------------------------------------------- */
 /* == screens */
 /* ----------------------------------------------------------- */
 
-@import "5-screens/welcome.css";
-@import "5-screens/capture.css";
-@import "5-screens/download.css";
+@import "/assets/css/5-screens/welcome.css";
+@import "/assets/css/5-screens/capture.css";
+@import "/assets/css/5-screens/download.css";
 
 /* ----------------------------------------------------------- */
 /* == helpers */
 /* ----------------------------------------------------------- */
 
-@import "6-helpers/_alignment.css";
-@import "6-helpers/_spacing.css";
-@import "6-helpers/_width.css";
+@import "/assets/css/6-helpers/_alignment.css";
+@import "/assets/css/6-helpers/_spacing.css";
+@import "/assets/css/6-helpers/_width.css";
 
 /* ----------------------------------------------------------- */
 /* == rwd */
 /* ----------------------------------------------------------- */
 
-@import "7-rwd/_rwd-xsmall.css";
-@import "7-rwd/_rwd-small.css";
-@import "7-rwd/_rwd-medium.css";
-@import "7-rwd/_rwd-large.css";
+@import "/assets/css/7-rwd/_rwd-xsmall.css";
+@import "/assets/css/7-rwd/_rwd-small.css";
+@import "/assets/css/7-rwd/_rwd-medium.css";
+@import "/assets/css/7-rwd/_rwd-large.css";

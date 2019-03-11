@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { capture } from '@/services/capture.js'
-import { encode } from '@/services/encode.js'
+import { capture } from '/services/capture.js'
+import { encode } from '/services/encode.js'
 
 Vue.use(Vuex)
 

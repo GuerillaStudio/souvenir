@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "dependencies": {
     "gif-writer": "^0.9.3",
@@ -14,15 +13,15 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-plugin-pwa": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
-    "@vue/eslint-config-standard": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21",
-    "worker-loader": "^2.0.0"
+    "@vue/component-compiler-utils": "^2.6.0",
+    "autoprefixer": "^9.4.10",
+    "parcel-bundler": "^1.12.0",
+    "parcel-plugin-static-files-copy": "^2.0.0",
+    "vue-hot-reload-api": "^2.3.3",
+    "vue-template-compiler": "^2.6.8"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
   }
 }
