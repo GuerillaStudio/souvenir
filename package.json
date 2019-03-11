@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "lint": "eslint --ext .js,vue .",
+    "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
     "gif-writer": "^0.9.3",
@@ -15,6 +17,13 @@
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
     "autoprefixer": "^9.4.10",
+    "eslint": "^5.15.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.2.2",
     "parcel-bundler": "^1.12.0",
     "parcel-plugin-static-files-copy": "^2.0.0",
     "vue-hot-reload-api": "^2.3.3",

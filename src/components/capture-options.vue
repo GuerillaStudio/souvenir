@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="options">
-    <select class="options__select" v-model="timer.selected" @change="updateTimer(timer.selected)" :disabled="encoding.status">
+    <select v-model="timer.selected" class="options__select" :disabled="encoding.status" @change="updateTimer(timer.selected)">
       <option v-for="time in timer.list" :key="time" :value="time">
         {{ timeLabel(time) }}
       </option>
     </select>
-    <button class="options__btn" @click="back" :disabled="encoding.status"><icon-switch/>switch</button>
+    <button class="options__btn" :disabled="encoding.status" @click="back"><icon-switch/>switch</button>
   </div>
 </template>
 

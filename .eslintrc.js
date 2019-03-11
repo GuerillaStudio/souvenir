@@ -1,16 +1,40 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true
+  'env': {
+    'es6': true,
+    'node': true
   },
   'extends': [
-    'plugin:vue/essential',
-    '@vue/standard'
+    'standard',
+    'plugin:vue/essential'
   ],
-  rules: {
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  'globals': {
+    'Atomics': 'readonly',
+    'SharedArrayBuffer': 'readonly'
   },
-  parserOptions: {
-    parser: 'babel-eslint'
+  'parserOptions': {
+    'ecmaVersion': 2018,
+  },
+  'plugins': [
+    'vue'
+  ],
+  'rules': {
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'vue/html-end-tags': 'error',
+    'vue/html-indent': [
+      'error',
+      2
+    ],
+    'vue/require-prop-types': 'error',
+    'vue/attributes-order': 'error',
+    'vue/attribute-hyphenation': [
+      'error',
+      'always'
+    ],
+    'vue/html-quotes': [
+      'error',
+      'double'
+    ]
+
   }
 }

@@ -4,7 +4,11 @@ Capture few seconds as a gif for souvenir
 
 ## Project setup
 ```
-npm install
+npm i
+```
+of if you don't want to impact the package-lock
+```
+npm ci
 ```
 
 ### Compiles and hot-reloads for development
@@ -17,15 +21,10 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+npm run lint-fix
+```

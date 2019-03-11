@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="capture">
-    <div class="capture-progress" v-if="capturing.status">
+    <div v-if="capturing.status" class="capture-progress">
       <capture-progress></capture-progress>
     </div>
     <capture-options v-else></capture-options>
 
-    <div class="preview" ref="previewcontainer">
+    <div ref="previewcontainer" class="preview">
       <video ref="preview" class="preview-visual" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
