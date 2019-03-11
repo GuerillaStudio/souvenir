@@ -24,6 +24,12 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'capture',
+  data () {
+    return {
+      loadListener: null,
+      resizeListener: null
+    }
+  },
   components: {
     captureOptions,
     captureProgress,
@@ -84,11 +90,21 @@ export default {
   },
   mounted: function () {
     this.$refs.preview.srcObject = this.mediaStream
-
     this.getpreviewcontainerSquare()
-    this.$refs.preview.addEventListener('resize', ev => {
+
+    // On load
+    this.loadListener = this.$refs.preview.addEventListener('resize', () => {
       this.applyScaling()
     }, false)
+    // On window resize
+    this.resizeListener = window.addEventListener('resize', () => {
+      this.getpreviewcontainerSquare()
+      this.applyScaling()
+    }, false)
+  },
+  destroyed: function () {
+    this.loadListener = null
+    this.resizeListener = null
   }
 }
 </script>

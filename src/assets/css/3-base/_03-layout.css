@@ -9,5 +9,6 @@
   flex-grow: 1;
   margin-right: auto;
   margin-left: auto;
-  max-width: 32rem;
+  max-width: calc(100% - 2rem);
+  width: 32rem;
 }

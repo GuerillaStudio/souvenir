@@ -5,7 +5,7 @@
       <button class="options__btn" @click="back">← back</button>
     </div>
 
-    <div class="preview">
+    <div class="preview" ref="previewcontainer">
       <img class="preview-visualImg" :src="downloading.objectUrl" alt="">
     </div>
 
