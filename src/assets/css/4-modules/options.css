@@ -33,7 +33,7 @@
 
 .options__select {
   padding-right: 4.4rem;
-  background: url("/img/ico-arrow.svg") no-repeat;
+  background: url("/assets/img/ico-arrow.svg") no-repeat;
   background-position: calc(100% - 2rem) center;
 }
 
