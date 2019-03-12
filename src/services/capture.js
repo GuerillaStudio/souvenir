@@ -11,7 +11,6 @@ export function capture (commit, mediaStream, duration) {
   return new Promise((resolve, reject) => {
     const video = document.createElement('video')
     video.autoplay = true
-    video.muted = true
     video.setAttribute('playsinline', '')
     video.setAttribute('webkit-playsinline', '')
 
