@@ -28,6 +28,7 @@
           "z-index",
           "display",
           "visibility",
+          "-moz-appearance",
           "-webkit-appearance",
           "appearance",
           "flex-direction",
