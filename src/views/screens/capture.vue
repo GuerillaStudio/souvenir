@@ -46,6 +46,10 @@ export default {
   },
   mounted: function () {
     window.objectFitPolyfill(this.$refs.preview)
+    document.body.classList.add('capture-body')
+  },
+  destroyed: function () {
+    document.body.classList.remove('capture-body')
   }
 }
 </script>
