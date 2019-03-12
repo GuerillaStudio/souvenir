@@ -6,7 +6,7 @@
     <capture-options v-else></capture-options>
 
     <div ref="previewcontainer" class="preview">
-      <video ref="preview" class="preview-visual" preload="yes" autoplay muted playsinline webkit-playsinline></video>
+      <video ref="preview" class="preview-visual" preload="yes" :srcObject.prop="mediaStream" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture">Capture</button>
@@ -89,7 +89,6 @@ export default {
 
   },
   mounted: function () {
-    this.$refs.preview.srcObject = this.mediaStream
     this.getpreviewcontainerSquare()
 
     // On load
