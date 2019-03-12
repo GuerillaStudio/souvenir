@@ -11,6 +11,7 @@
   "dependencies": {
     "eventemitter3": "^3.1.0",
     "gif-writer": "^0.9.3",
+    "objectFitPolyfill": "^2.1.1",
     "postcss-modules": "^1.4.1",
     "vue": "^2.6.6",
     "vuex": "^3.0.1"

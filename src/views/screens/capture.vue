@@ -6,7 +6,7 @@
     <capture-options v-else></capture-options>
 
     <div class="preview">
-      <video class="preview-visual" preload="yes" :srcObject.prop="mediaStream" autoplay muted playsinline webkit-playsinline></video>
+      <video ref="preview" class="preview-visual" preload="yes" :srcObject.prop="mediaStream" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture">Capture</button>
@@ -19,6 +19,8 @@
 import captureOptions from '/views/components/capture-options'
 import captureProgress from '/views/components/capture-progress'
 import encodingOverlay from '/views/components/encoding'
+
+import objectFitPolyfill from 'objectFitPolyfill'
 
 import { mapState } from 'vuex'
 
@@ -41,6 +43,9 @@ export default {
     startCapture () {
       this.$store.dispatch('capture')
     }
+  },
+  mounted: function () {
+    window.objectFitPolyfill(this.$refs.preview)
   }
 }
 </script>
