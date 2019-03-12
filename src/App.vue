@@ -8,9 +8,9 @@
 
 <script>
 
-import welcomeScreen from '/views/welcome'
-import captureScreen from '/views/capture'
-import downloadScreen from '/views/download'
+import welcomeScreen from '/views/screens/welcome'
+import captureScreen from '/views/screens/capture'
+import downloadScreen from '/views/screens/download'
 
 import { mapState } from 'vuex'
 
