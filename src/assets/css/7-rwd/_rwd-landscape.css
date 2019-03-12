@@ -25,6 +25,14 @@
     align-items: center;
   }
 
+  .welcome-title {
+    margin-bottom: 4rem;
+  }
+
+  .welcome-about {
+    margin-bottom: 2rem;
+  }
+
   /* Capture screen
   -------------------------------------------------------------- */
 
