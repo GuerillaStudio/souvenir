@@ -5,7 +5,7 @@
         {{ timeLabel(time) }}
       </option>
     </select>
-    <button class="options__btn" :disabled="encoding.status" @click="back"><icon-switch></icon-switch>switch</button>
+    <button class="options__btn" :disabled="encoding.status" @click="switchCamera"><icon-switch></icon-switch>switch</button>
   </div>
 </template>
 
@@ -26,8 +26,8 @@ export default {
     ])
   },
   methods: {
-    back () {
-      this.$store.commit('updateMediaStream', null)
+    switchCamera () {
+      this.$store.dispatch('requestCamera', true)
     },
     timeLabel (time) {
       return time + 's'
