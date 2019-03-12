@@ -18,6 +18,13 @@
     width: 100%;
   }
 
+  /* Welcome screen
+  -------------------------------------------------------------- */
+
+  .welcome {
+    align-items: center;
+  }
+
   /* Capture screen
   -------------------------------------------------------------- */
 
@@ -27,11 +34,16 @@
     margin-bottom: auto;
   }
 
+  .capture-progress {
+    align-self: center;
+  }
+
   .capture-btn {
     flex-shrink: .0;
     margin-top: 0;
     margin-right: 2rem;
     margin-bottom: 0;
+    margin-left: auto;
   }
 
   /* Options
@@ -59,11 +71,10 @@
   -------------------------------------------------------------- */
 
   .progressBar {
-    align-self: center;
     margin-right: 1rem;
     margin-left: 1rem;
     width: 9.5rem;
-    height: inherit;
+    height: auto;
   }
 
   /* Preview
@@ -74,5 +85,21 @@
     margin-right: 2rem;
     margin-bottom: 0;
     max-width: 80vh;
+  }
+
+  /* Download
+  -------------------------------------------------------------- */
+
+  .download {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .download-btn,
+  .download-btn:visited {
+    margin: auto 0;
+    margin-right: 2rem;
+    margin-left: auto;
+    width: auto;
   }
 }
