@@ -1,0 +1,78 @@
+/* ----------------------------------------------------------- */
+/* == rwd -> large */
+/* ----------------------------------------------------------- */
+
+@media (orientation: landscape) and (max-height: 450px) {
+  /* layout
+  -------------------------------------------------------------- */
+
+  .layout {
+    flex-direction: row;
+    align-items: center;
+    margin-top: auto;
+    margin-right: 0;
+    margin-bottom: auto;
+    margin-left: 0;
+    max-width: none;
+    max-height: calc(100% - 2rem);
+    width: 100%;
+  }
+
+  /* Capture screen
+  -------------------------------------------------------------- */
+
+  .capture {
+    flex-direction: row;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .capture-btn {
+    flex-shrink: .0;
+    margin-top: 0;
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+
+  /* Options
+  -------------------------------------------------------------- */
+
+  .options {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
+    width: 11.5rem;
+  }
+
+  .options__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .options__btn svg {
+    margin-right: 0;
+    margin-bottom: .5rem;
+  }
+
+  /* Progress bar
+  -------------------------------------------------------------- */
+
+  .progressBar {
+    align-self: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    width: 9.5rem;
+    height: inherit;
+  }
+
+  /* Preview
+  -------------------------------------------------------------- */
+
+  .preview {
+    flex-shrink: 0;
+    margin-right: 2rem;
+    margin-bottom: 0;
+    max-width: 80vh;
+  }
+}
