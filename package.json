@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "gif-writer": "^0.9.3",
+    "postcss-modules": "^1.4.1",
     "vue": "^2.6.6",
     "vuex": "^3.0.1"
   },

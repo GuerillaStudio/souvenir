@@ -15,8 +15,6 @@
 
 .options__select,
 .options__btn {
-  -moz-appearance: none;
-  -webkit-appearance: none;
   appearance: none;
   padding: 2rem;
   border: .1rem solid transparent;
