@@ -17,7 +17,7 @@ export default {
   name: 'welcome',
   methods: {
     welcome () {
-      this.$store.dispatch('requestCamera')
+      this.$store.dispatch('welcome')
     }
   }
 }

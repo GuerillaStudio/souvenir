@@ -9,6 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
+    welcomed: false,
     mediaStream: null,
     timer: {
       selected: 2,
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     },
     capturing: {
       status: false,
+      shouldFaceUser: true,
       state: 0
     },
     encoding: {
@@ -28,12 +30,19 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    updateMediaStream (store, mediaStream) {
-      if (store.mediaStream) {
-        store.mediaStream.getTracks().forEach(track => track.stop())
+    welcome (state) {
+      state.welcomed = true;
+    },
+    startCamera (state, mediaStream) {
+      state.mediaStream = mediaStream
+    },
+    stopCamera (state) {
+      if (state.mediaStream) {
+        state.mediaStream.getTracks().forEach(track => track.stop())
       }
-
-      store.mediaStream = mediaStream
+    },
+    inverseFacingMode (store) {
+      store.capturing.shouldFaceUser = !store.capturing.shouldFaceUser
     },
     updateTimer (store, time) {
       store.timer.selected = time
@@ -69,17 +78,31 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    requestCamera ({ commit }) {
-      const constaints = {
+    welcome ({ commit, dispatch }) {
+      commit('welcome')
+      dispatch('requestCamera', false)
+    },
+    requestCamera ({ state, commit }, inverseFacingMode) {
+      const shouldFaceUser = inverseFacingMode
+        ? !state.capturing.shouldFaceUser
+        : state.capturing.shouldFaceUser
+
+      const constraints = {
         video: {
-          facingMode: 'user'
+          facingMode: shouldFaceUser ? 'user' : 'environment'
         },
         audio: false
       }
 
-      navigator.mediaDevices.getUserMedia(constaints)
+      commit('stopCamera')
+
+      navigator.mediaDevices.getUserMedia(constraints)
         .then(mediaStream => {
-          commit('updateMediaStream', mediaStream)
+          commit('startCamera', mediaStream)
+
+          if (inverseFacingMode) {
+            commit('inverseFacingMode')
+          }
         })
         .catch(error => console.error(error))
     },
