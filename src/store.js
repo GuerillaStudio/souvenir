@@ -119,15 +119,16 @@ export default new Vuex.Store({
     },
     encode ({ commit }, captureData) {
       commit('startEncoding')
+      const encoding = encode(captureData)
 
-      console.log(captureData)
+      encoding.once('error', error => console.error(error))
 
-      encode(captureData)
-        .then(dataUrl => {
-          commit('stopEncoding')
-          commit('startDownloading', dataUrl)
-        })
-        .catch(error => console.error(error))
+      encoding.on('progress', value => console.log(`Encoding progress ${Math.round(value * 100)}% (${value})`))
+
+      encoding.once('done', objectUrl => {
+        commit('stopEncoding')
+        commit('startDownloading', objectUrl)
+      })
     }
   }
 })

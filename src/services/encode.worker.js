@@ -7,17 +7,13 @@ import {
 onmessage = (event) => {
   const { imageDataList, imageWidth, imageHeight, paletteSize, delayTime } = event.data
 
-  console.log('Write GIF')
-
   const outputStream = new OutputStream()
   const writer = new GifWriter(outputStream)
 
   postProgressMessage(0)
 
-  console.log(`Write header`)
   writer.writeHeader()
 
-  console.log(`Write logical screen informations`)
   writer.writeLogicalScreenInfo({
     width: imageWidth,
     height: imageHeight
@@ -26,19 +22,16 @@ onmessage = (event) => {
   writer.writeLoopControlInfo(0)
 
   const indexedColorImages = imageDataList.map((imageData, index, { length }) => {
-    console.log(`Convert frame ${index} ImageData to IndexedColorImage`)
     const indexedColorImage = imageDataToIndexedColorImage(imageData, paletteSize)
     postProgressMessage(calcProgress(0, 0.9, length, index + 1))
     return indexedColorImage
   })
 
   indexedColorImages.forEach((indexedColorImage, index, { length }) => {
-    console.log(`Write frame IndexedColorImage ${index}`)
     writer.writeTableBasedImageWithGraphicControl(indexedColorImage, { delayTimeInMS: delayTime })
     postProgressMessage(calcProgress(0.9, 1, length, index + 1))
   })
 
-  console.log(`Write trailer`)
   writer.writeTrailer()
 
   postDoneMessage(outputStream.buffer)

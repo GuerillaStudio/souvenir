@@ -9,6 +9,7 @@
     "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
+    "eventemitter3": "^3.1.0",
     "gif-writer": "^0.9.3",
     "postcss-modules": "^1.4.1",
     "vue": "^2.6.6",
