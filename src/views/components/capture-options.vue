@@ -5,7 +5,7 @@
         {{ timeLabel(time) }}
       </option>
     </select>
-    <button class="options__btn" :disabled="encoding.status" @click="back"><icon-switch/>switch</button>
+    <button class="options__btn" :disabled="encoding.status" @click="back"><icon-switch></icon-switch>switch</button>
   </div>
 </template>
 
