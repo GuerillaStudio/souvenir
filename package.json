@@ -9,14 +9,19 @@
     "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
+    "@babel/runtime": "^7.3.4",
     "eventemitter3": "^3.1.0",
     "gif-writer": "^0.9.3",
     "objectFitPolyfill": "^2.1.1",
+    "p-limit": "^2.2.0",
     "postcss-modules": "^1.4.1",
+    "promises-progress": "^1.0.3",
     "vue": "^2.6.6",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
     "@vue/component-compiler-utils": "^2.6.0",
     "autoprefixer": "^9.4.10",
     "eslint": "^5.15.1",

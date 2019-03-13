@@ -1,10 +1,9 @@
-import {
-  GifWriter,
-  MedianCutColorReducer,
-  IndexedColorImage
-} from 'gif-writer'
+import { GifWriter } from 'gif-writer'
+import pLimit from 'p-limit'
 
-onmessage = (event) => {
+onmessage = handleMessage
+
+async function handleMessage (event) {
   const { imageDataList, imageWidth, imageHeight, paletteSize, delayTime } = event.data
 
   const outputStream = new OutputStream()
@@ -21,15 +20,24 @@ onmessage = (event) => {
 
   writer.writeLoopControlInfo(0)
 
-  const indexedColorImages = imageDataList.map((imageData, index, { length }) => {
-    const indexedColorImage = imageDataToIndexedColorImage(imageData, paletteSize)
-    postProgressMessage(calcProgress(0, 0.9, length, index + 1))
-    return indexedColorImage
+  console.time('quantization')
+
+  const limit = pLimit(8)
+
+  const promises = imageDataList
+    .map(imageData => limit(() => convertImageDataToIndexedColorImage(imageData, paletteSize)))
+
+  const progressPromises = promisesProgress(promises, function (value) {
+    postProgressMessage(calcProgress(0, 0.9, value))
   })
+
+  const indexedColorImages = await Promise.all(progressPromises)
+
+  console.timeEnd('quantization')
 
   indexedColorImages.forEach((indexedColorImage, index, { length }) => {
     writer.writeTableBasedImageWithGraphicControl(indexedColorImage, { delayTimeInMS: delayTime })
-    postProgressMessage(calcProgress(0.9, 1, length, index + 1))
+    postProgressMessage(calcProgress(0.9, 1, (index + 1) / length))
   })
 
   writer.writeTrailer()
@@ -51,29 +59,40 @@ class OutputStream {
   }
 }
 
-function imageDataToIndexedColorImage (imageData, paletteSize) {
-  var reducer = new MedianCutColorReducer(imageData, paletteSize)
-  var paletteData = reducer.process()
-  var dat = Array.prototype.slice.call(imageData.data)
+function promisesProgress (promises, progress) {
+  let complete = 0
 
-  var indexedColorImageData = []
-
-  for (var idx = 0, len = dat.length; idx < len; idx += 4) {
-    var d = dat.slice(idx, idx + 4) // r,g,b,a
-    indexedColorImageData.push(reducer.map(d[0], d[1], d[2]))
-  }
-
-  return new IndexedColorImage(
-    {
-      width: imageData.width,
-      height: imageData.height
-    },
-    indexedColorImageData,
-    paletteData
-  )
+  return promises.map(p => {
+    return p.then(x => {
+      progress(++complete / promises.length)
+      return p
+    })
+  })
 }
 
-function calcProgress (from, to, steps, current) {
+function convertImageDataToIndexedColorImage (imageData, paletteSize) {
+  return new Promise((resolve, reject) => {
+    const worker = new Worker('/services/quantize-color.worker.js')
+
+    worker.onerror = reject
+    worker.onmessageerror = reject
+    worker.onmessage = event => {
+      resolve(event.data)
+    }
+
+    worker.postMessage({
+      imageData,
+      paletteSize
+    })
+  })
+}
+
+function calcProgress (from, to, value) {
+  return from + ((to - from) * value)
+}
+
+
+function calcProgress2 (from, to, steps, current) {
   return from + ((to - from) / steps * current)
 }
 
