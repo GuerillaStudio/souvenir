@@ -30,8 +30,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    welcome (state) {
-      state.welcomed = true;
+    updateWelcomed (state, welcome) {
+      state.welcomed = welcome;
     },
     startCamera (state, mediaStream) {
       state.mediaStream = mediaStream
@@ -79,7 +79,7 @@ export default new Vuex.Store({
   },
   actions: {
     welcome ({ commit, dispatch }) {
-      commit('welcome')
+      commit('updateWelcomed', true)
       dispatch('requestCamera', false)
     },
     requestCamera ({ state, commit }, inverseFacingMode) {
@@ -104,7 +104,10 @@ export default new Vuex.Store({
             commit('inverseFacingMode')
           }
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+          console.error(error)
+          commit('updateWelcomed', false)
+        })
     },
     capture ({ commit, dispatch, state }) {
       commit('startCapture')
