@@ -26,6 +26,23 @@ export default {
       'welcomed',
       'downloading'
     ])
+  },
+  methods: {
+    handleVisibilityChange (event) {
+      if (document.hidden) {
+        this.$store.commit('stopCamera')
+      } else {
+        if (this.welcomed) {
+          this.$store.dispatch('requestCamera', false)
+        }
+      }
+    }
+  },
+  mounted () {
+    document.addEventListener('visibilitychange', this.handleVisibilityChange)
+  },
+  destroyed () {
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange)
   }
 }
 </script>
