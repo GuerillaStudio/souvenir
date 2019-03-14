@@ -31,7 +31,7 @@ export default new Vuex.Store({
   },
   mutations: {
     updateWelcomed (state, welcome) {
-      state.welcomed = welcome;
+      state.welcomed = welcome
     },
     startCamera (state, mediaStream) {
       state.mediaStream = mediaStream

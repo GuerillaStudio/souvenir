@@ -1,31 +1,49 @@
-import { GifWriter } from 'gif-writer'
-import pLimit from 'p-limit'
+import genericPool from 'generic-pool'
+import pEvent from 'p-event'
+import { write } from '/services/encode-core.js'
+import { promisesProgress, calcProgress } from '/services/util.js'
 
 onmessage = handleMessage
+
+const workerPool = genericPool.createPool({
+  create () {
+    return new Worker('/services/quantize-color.worker.js')
+  },
+  destroy (worker) {
+    worker.terminate()
+  }
+}, {
+  min: 0,
+  max: 4
+})
 
 async function handleMessage (event) {
   const { imageDataList, imageWidth, imageHeight, paletteSize, delayTime } = event.data
 
-  const outputStream = new OutputStream()
-  const writer = new GifWriter(outputStream)
-
   postProgressMessage(0)
-
-  writer.writeHeader()
-
-  writer.writeLogicalScreenInfo({
-    width: imageWidth,
-    height: imageHeight
-  })
-
-  writer.writeLoopControlInfo(0)
 
   console.time('quantization')
 
-  const limit = pLimit(8)
-
   const promises = imageDataList
-    .map(imageData => limit(() => convertImageDataToIndexedColorImage(imageData, paletteSize)))
+    .map(async imageData => {
+      const worker = await workerPool.acquire()
+
+      const indexedColorImage = await new Promise((resolve, reject) => {
+        worker.onerror = reject
+        worker.onmessageerror = reject
+        worker.onmessage = event => {
+          resolve(event.data)
+        }
+
+        worker.postMessage({
+          imageData,
+          paletteSize
+        })
+      })
+
+      await workerPool.release(worker)
+      return indexedColorImage
+    })
 
   const progressPromises = promisesProgress(promises, function (value) {
     postProgressMessage(calcProgress(0, 0.9, value))
@@ -35,65 +53,17 @@ async function handleMessage (event) {
 
   console.timeEnd('quantization')
 
-  indexedColorImages.forEach((indexedColorImage, index, { length }) => {
-    writer.writeTableBasedImageWithGraphicControl(indexedColorImage, { delayTimeInMS: delayTime })
-    postProgressMessage(calcProgress(0.9, 1, (index + 1) / length))
-  })
+  console.time('write')
 
-  writer.writeTrailer()
+  const writing = write(indexedColorImages, imageWidth, imageHeight, delayTime)
 
-  postDoneMessage(outputStream.buffer)
-}
+  writing.on('progress', value => postProgressMessage(calcProgress(0.9, 1, value)))
 
-class OutputStream {
-  constructor () {
-    this.buffer = []
-  }
+  const buffer = await pEvent(writing, 'done')
 
-  writeByte (b) {
-    this.buffer.push(b)
-  }
+  console.timeEnd('write')
 
-  writeBytes (bb) {
-    Array.prototype.push.apply(this.buffer, bb)
-  }
-}
-
-function promisesProgress (promises, progress) {
-  let complete = 0
-
-  return promises.map(p => {
-    return p.then(x => {
-      progress(++complete / promises.length)
-      return p
-    })
-  })
-}
-
-function convertImageDataToIndexedColorImage (imageData, paletteSize) {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker('/services/quantize-color.worker.js')
-
-    worker.onerror = reject
-    worker.onmessageerror = reject
-    worker.onmessage = event => {
-      resolve(event.data)
-    }
-
-    worker.postMessage({
-      imageData,
-      paletteSize
-    })
-  })
-}
-
-function calcProgress (from, to, value) {
-  return from + ((to - from) * value)
-}
-
-
-function calcProgress2 (from, to, steps, current) {
-  return from + ((to - from) / steps * current)
+  postDoneMessage(buffer)
 }
 
 function postProgressMessage (value) {
