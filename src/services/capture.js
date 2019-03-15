@@ -1,11 +1,13 @@
 import {
+  GIF_WIDTH,
+  GIF_HEIGHT,
+  GIF_FRAME_RATE
+} from '/constants.js'
+
+import {
   makeRectangle,
   crop
 } from '/services/rectangle.js'
-
-const FRAMES_PER_SECOND = 10
-const WIDTH = 200
-const HEIGHT = WIDTH
 
 export function capture (commit, mediaStream, duration) {
   return new Promise((resolve, reject) => {
@@ -15,18 +17,18 @@ export function capture (commit, mediaStream, duration) {
     video.setAttribute('webkit-playsinline', '')
 
     const canvas = document.createElement('canvas')
-    canvas.width = WIDTH
-    canvas.height = HEIGHT
+    canvas.width = GIF_WIDTH
+    canvas.height = GIF_HEIGHT
 
     const canvasContext = canvas.getContext('2d')
 
-    const totalFrames = duration / 1000 * FRAMES_PER_SECOND
+    const totalFrames = duration / 1000 * GIF_FRAME_RATE
 
     if (totalFrames < 1) {
       resolve([])
     }
 
-    const delayTime = 1000 / FRAMES_PER_SECOND
+    const delayTime = 1000 / GIF_FRAME_RATE
 
     video.srcObject = mediaStream
 
@@ -67,8 +69,8 @@ export function capture (commit, mediaStream, duration) {
 
           resolve({
             imageDataList,
-            imageWidth: WIDTH,
-            imageHeight: HEIGHT,
+            imageWidth: GIF_WIDTH,
+            imageHeight: GIF_HEIGHT,
             delayTime
           })
         }

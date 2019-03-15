@@ -4,7 +4,7 @@ import pEvent from 'p-event'
 import { write } from '/services/encode-core.js'
 import { promisesProgress, calcProgress } from '/services/util.js'
 
-const PALETTE_SIZE = 255
+import { GIF_PALETTE_SIZE } from '/constants.js'
 
 export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
   const emitter = new EventEmitter()
@@ -31,7 +31,7 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
 
         worker.postMessage({
           imageData,
-          paletteSize: PALETTE_SIZE
+          paletteSize: GIF_PALETTE_SIZE
         })
       })
 
