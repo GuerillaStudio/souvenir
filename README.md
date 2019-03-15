@@ -20,6 +20,10 @@ npm run serve
 ```
 npm run build
 ```
+If you want absolute public urls
+```
+npm run build -- --public-url https://my.super.kawaii.website/
+```
 
 ### Lints and fixes files
 ```
