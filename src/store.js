@@ -108,6 +108,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.error(error)
+          window.alert('You haven\'t allowed to use your camera.\n\nOr maybe your browser is not compatible :(')
           commit('updateWelcomed', false)
         })
     },
