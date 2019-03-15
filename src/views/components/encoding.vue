@@ -1,10 +1,13 @@
 <template lang="html">
   <div class="encoding">
-    Encoding {{ ellipsis }}
+    Encoding {{ ellipsis }}<br/>
+    {{ encoding.progress }}%
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'encodingOverlay',
   data () {
@@ -12,6 +15,11 @@ export default {
       ellipsis: '',
       interval: null
     }
+  },
+  computed: {
+    ...mapState([
+      'encoding'
+    ])
   },
   methods: {
     makeLoading () {

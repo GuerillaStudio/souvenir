@@ -21,7 +21,8 @@ export default new Vuex.Store({
       state: 0
     },
     encoding: {
-      status: false
+      status: false,
+      progress: 0
     },
     downloading: {
       status: false,
@@ -63,6 +64,9 @@ export default new Vuex.Store({
     },
     stopEncoding (store) {
       store.encoding.status = false
+    },
+    updateEncodingProgress (store, progress) {
+      store.encoding.progress = progress
     },
     startDownloading (store, objectUrl) {
       store.downloading.status = true
@@ -132,10 +136,14 @@ export default new Vuex.Store({
 
       encoding.once('error', error => console.error(error))
 
-      encoding.on('progress', value => console.log(`Encoding progress ${Math.round(value * 100)}% (${value})`))
+      encoding.on('progress', value => {
+        console.log(`Encoding progress ${Math.round(value * 100)}% (${value})`)
+        commit('updateEncodingProgress', Math.round(value * 100))
+      })
 
       encoding.once('done', objectUrl => {
         commit('stopEncoding')
+        commit('updateEncodingProgress', 0)
         commit('startDownloading', objectUrl)
       })
     }
