@@ -1,16 +1,22 @@
-import {
-  GIF_WIDTH,
-  GIF_HEIGHT,
-  GIF_FRAME_RATE
-} from '/constants.js'
+import EventEmitter from 'eventemitter3'
 
 import {
   makeRectangle,
   crop
 } from '/services/rectangle.js'
 
-export function capture (commit, mediaStream, duration) {
-  return new Promise((resolve, reject) => {
+import {
+  GIF_WIDTH,
+  GIF_HEIGHT,
+  GIF_FRAME_RATE
+} from '/constants.js'
+
+
+
+export function capture (mediaStream, duration) {
+  const emitter = new EventEmitter()
+
+  Promise.resolve().then(() => {
     const video = document.createElement('video')
     video.autoplay = true
     video.setAttribute('playsinline', '')
@@ -40,8 +46,6 @@ export function capture (commit, mediaStream, duration) {
 
       const intervalId = setInterval(() => {
         if (imageDataList.length < totalFrames) {
-          console.log(`Capturing frame ${imageDataList.length + 1} / ${totalFrames}`)
-
           canvasContext.drawImage(
             video,
             soureRectangle.x,
@@ -63,11 +67,11 @@ export function capture (commit, mediaStream, duration) {
 
           imageDataList.push(imageData)
 
-          commit('updateCaptureState', imageDataList.length / totalFrames * 100)
+          emitter.emit('progress', imageDataList.length / totalFrames)
         } else {
           clearInterval(intervalId)
 
-          resolve({
+          emitter.emit('done', {
             imageDataList,
             imageWidth: GIF_WIDTH,
             imageHeight: GIF_HEIGHT,
@@ -77,4 +81,7 @@ export function capture (commit, mediaStream, duration) {
       }, delayTime)
     })
   })
+  .catch(error => emitter.emit('error', error))
+
+  return emitter;
 }

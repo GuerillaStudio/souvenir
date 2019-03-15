@@ -111,14 +111,17 @@ export default new Vuex.Store({
     },
     capture ({ commit, dispatch, state }) {
       commit('startCapture')
+      const capturing = capture(state.mediaStream, state.timer.selected * 1000)
 
-      capture(commit, state.mediaStream, state.timer.selected * 1000)
-        .then(captureData => {
-          commit('stopCapture')
-          commit('updateCaptureState', 0)
-          dispatch('encode', captureData)
-        })
-        .catch(error => console.error(error))
+      capturing.once('error', error => console.error(error))
+
+      capturing.on('progress', value => commit('updateCaptureState', Math.round(value * 100)))
+
+      capturing.once('done', captureData => {
+        commit('stopCapture')
+        commit('updateCaptureState', 0)
+        dispatch('encode', captureData)
+      })
     },
     encode ({ commit }, captureData) {
       commit('startEncoding')
