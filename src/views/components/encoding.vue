@@ -1,7 +1,13 @@
 <template lang="html">
   <div class="encoding">
-    Encoding {{ ellipsis }}<br/>
-    {{ encoding.progress }}%
+    <div class="encoding-illu">
+      <img src="/assets/img/video-encoding.svg" alt="">
+    </div>
+    <div class="encoding-label">Encoding</div>
+    <div class="encoding-progressBar">
+      <div class="encoding-progressBar__state" :style="'width: ' + encoding.state + '%;'"></div>
+    </div>
+    <div class="encoding-percent">{{ encoding.state }}%</div>
   </div>
 </template>
 
@@ -10,34 +16,10 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'encodingOverlay',
-  data () {
-    return {
-      ellipsis: '',
-      interval: null
-    }
-  },
   computed: {
     ...mapState([
       'encoding'
     ])
-  },
-  methods: {
-    makeLoading () {
-      // Dot loading
-      this.interval = setInterval(() => {
-        if (this.ellipsis.length < 3) {
-          this.ellipsis += '.'
-        } else {
-          this.ellipsis = ''
-        }
-      }, 200)
-    }
-  },
-  mounted: function () {
-    this.makeLoading()
-  },
-  destroyed: function () {
-    window.clearTimeout(this.interval)
   }
 }
 </script>

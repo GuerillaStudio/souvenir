@@ -7,12 +7,66 @@
   top: 0;
   left: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, .9);
   color: #fff;
   text-align: center;
   font-size: 2.4rem;
+}
+
+.encoding-illu {
+  position: relative;
+  margin-bottom: 5rem;
+}
+
+.encoding-illu::before {
+  position: absolute;
+  top: .5rem;
+  right: -1rem;
+  left: -1rem;
+  height: .5rem;
+  border-radius: .5rem;
+  border-radius: .4rem;
+  background: var(--color-primary);
+  box-shadow: 0 .4rem .4rem rgba(0, 0, 0, .25);
+  content: "";
+  animation: encodingProgress .3s ease-in-out infinite alternate;
+}
+
+@keyframes encodingProgress {
+  from {
+    top: .5rem;
+  }
+
+  to {
+    top: calc(100% - 1rem);
+  }
+}
+
+.encoding-label {
+  font-size: 2rem;
+}
+
+.encoding-progressBar {
+  overflow: hidden;
+  margin: 2rem 0;
+  max-width: 30rem;
+  width: 90%;
+  border-radius: .5rem;
+  background-color: rgba(255, 255, 255, .2);
+}
+
+.encoding-progressBar__state {
+  height: .5rem;
+  background: linear-gradient(91.78deg, var(--color-primary) 0%,var(--color-secondary) 100%);
+}
+
+.encoding-percent {
+  padding-bottom: 2rem;
+  font-size: 5rem;
+  line-height: 1;
 }
