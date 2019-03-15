@@ -17,22 +17,26 @@
 
 .welcome-title {
   margin: 0;
-  /* margin-bottom: 6rem; */
   font-weight: normal;
   font-size: 2.4rem;
   line-height: 1.3em;
 }
 
 .welcome-illu {
+  display: inline-flex;
+  justify-content: center;
   margin-top: -2rem;
   margin-bottom: 2rem;
   max-width: calc(100vw - 4rem);
   max-height: 30rem;
   width: auto;
+  height: auto;
 }
 
 .welcome-illu svg {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
 }
 

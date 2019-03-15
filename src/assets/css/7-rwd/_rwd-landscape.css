@@ -25,8 +25,8 @@
     align-items: center;
   }
 
-  .welcome-title {
-    margin-bottom: 4rem;
+  .welcome-illu {
+    max-height: 50vh;
   }
 
   .welcome-about {
