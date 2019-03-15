@@ -22,7 +22,7 @@ class OutputStream {
   }
 }
 
-export function write (indexedColorImages, imageWidth, imageHeight, delay) {
+export function write (imageWidth, imageHeight, delay, indexedColorImages) {
   const emitter = new EventEmitter()
 
   // yup, this is the browser nextTick implementation we are waiting for :facepalm:
