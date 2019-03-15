@@ -1,9 +1,6 @@
 import EventEmitter from 'eventemitter3'
-
-import {
-  makeRectangle,
-  crop
-} from '/services/rectangle.js'
+import pEvent from 'p-event'
+import { makeRectangle, crop } from '/services/rectangle.js'
 
 import {
   GIF_WIDTH,
@@ -11,75 +8,80 @@ import {
   GIF_FRAME_RATE
 } from '/constants.js'
 
-
-
 export function capture (mediaStream, duration) {
   const emitter = new EventEmitter()
 
-  Promise.resolve().then(() => {
-    const video = document.createElement('video')
-    video.autoplay = true
-    video.setAttribute('playsinline', '')
-    video.setAttribute('webkit-playsinline', '')
+  Promise.resolve().then(async () => {
+    const delayTime = 1000 / GIF_FRAME_RATE
+    const totalFrames = duration / 1000 * GIF_FRAME_RATE
+
+    // Well, this is a very low frame rate or very short duration clip
+    if (totalFrames < 1) {
+      emitter.emit('done', {
+        imageWidth: GIF_WIDTH,
+        imageHeight: GIF_HEIGHT,
+        imageDataList: [],
+        delayTime
+      })
+
+      return
+    }
+
+    const imageDataList = []
 
     const canvas = document.createElement('canvas')
     canvas.width = GIF_WIDTH
     canvas.height = GIF_HEIGHT
 
     const canvasContext = canvas.getContext('2d')
+    const destinationRectangle = makeRectangle(0, 0, canvas.width, canvas.height)
 
-    const totalFrames = duration / 1000 * GIF_FRAME_RATE
-
-    if (totalFrames < 1) {
-      resolve([])
-    }
-
-    const delayTime = 1000 / GIF_FRAME_RATE
-
+    const video = document.createElement('video')
+    video.setAttribute('playsinline', '')
+    video.setAttribute('webkit-playsinline', '')
     video.srcObject = mediaStream
+    video.play()
 
-    video.addEventListener('canplay', () => {
-      const soureRectangle = crop(makeRectangle(0, 0, video.videoWidth, video.videoHeight))
-      const destinationRectangle = makeRectangle(0, 0, canvas.width, canvas.height)
+    await pEvent(video, 'canplaythrough')
+    const soureRectangle = crop(makeRectangle(0, 0, video.videoWidth, video.videoHeight))
 
-      const imageDataList = []
+    step()
 
-      const intervalId = setInterval(() => {
-        if (imageDataList.length < totalFrames) {
-          canvasContext.drawImage(
-            video,
-            soureRectangle.x,
-            soureRectangle.y,
-            soureRectangle.width,
-            soureRectangle.height,
-            destinationRectangle.x,
-            destinationRectangle.y,
-            destinationRectangle.width,
-            destinationRectangle.height
-          )
+    function step() {
+      canvasContext.drawImage(
+        video,
+        soureRectangle.x,
+        soureRectangle.y,
+        soureRectangle.width,
+        soureRectangle.height,
+        destinationRectangle.x,
+        destinationRectangle.y,
+        destinationRectangle.width,
+        destinationRectangle.height
+      )
 
-          const imageData = canvasContext.getImageData(
-            destinationRectangle.x,
-            destinationRectangle.y,
-            destinationRectangle.width,
-            destinationRectangle.height
-          )
+      const imageData = canvasContext.getImageData(
+        destinationRectangle.x,
+        destinationRectangle.y,
+        destinationRectangle.width,
+        destinationRectangle.height
+      )
 
-          imageDataList.push(imageData)
+      imageDataList.push(imageData)
 
-          emitter.emit('progress', imageDataList.length / totalFrames)
-        } else {
-          clearInterval(intervalId)
+      emitter.emit('progress', imageDataList.length / totalFrames)
 
-          emitter.emit('done', {
-            imageDataList,
-            imageWidth: GIF_WIDTH,
-            imageHeight: GIF_HEIGHT,
-            delayTime
-          })
-        }
-      }, delayTime)
-    })
+      if (imageDataList.length < totalFrames) {
+        setTimeout(step, delayTime)
+      } else {
+        emitter.emit('done', {
+          imageDataList,
+          imageWidth: GIF_WIDTH,
+          imageHeight: GIF_HEIGHT,
+          delayTime
+        })
+      }
+    }
   })
   .catch(error => emitter.emit('error', error))
 
