@@ -19,7 +19,7 @@
 
 .btn {
   display: inline-block;
-  padding: .8em 1.6em;
+  padding: .8em 1.6em .9em;
   border: none;
   border-radius: var(--btn-radius);
   background-color: var(--btn-primary);

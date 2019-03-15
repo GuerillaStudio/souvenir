@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 4rem 2rem;
+  padding: 2rem;
 }
 
 .welcome-about {
@@ -16,10 +16,24 @@
 }
 
 .welcome-title {
-  margin-bottom: 6rem;
+  margin: 0;
+  /* margin-bottom: 6rem; */
   font-weight: normal;
   font-size: 2.4rem;
   line-height: 1.3em;
+}
+
+.welcome-illu {
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  max-width: calc(100vw - 4rem);
+  max-height: 30rem;
+  width: auto;
+}
+
+.welcome-illu svg {
+  width: 100%;
+  height: auto;
 }
 
 .welcome-steps {
@@ -28,7 +42,9 @@
   align-items: center;
   margin: 0;
   padding: 0;
+  padding-bottom: 2rem;
   color: rgba(255, 255, 255, .7);
+  font-size: 1.4rem;
 }
 
 .welcome-steps__item {
