@@ -40,6 +40,8 @@ export default new Vuex.Store({
       if (state.mediaStream) {
         state.mediaStream.getTracks().forEach(track => track.stop())
       }
+
+      state.mediaStream = null
     },
     inverseFacingMode (store) {
       store.capturing.shouldFaceUser = !store.capturing.shouldFaceUser

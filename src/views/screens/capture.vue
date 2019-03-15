@@ -6,10 +6,10 @@
     <capture-options v-else></capture-options>
 
     <div class="preview">
-      <video ref="preview" class="preview-visual" preload="yes" :srcObject.prop="mediaStream" autoplay muted playsinline webkit-playsinline></video>
+      <video ref="preview" class="preview-visual" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
-    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture">Capture</button>
+    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture" :disabled="!mediaStream">Capture</button>
 
     <encoding-overlay v-if="encoding.status"></encoding-overlay>
   </div>
@@ -42,6 +42,11 @@ export default {
   methods: {
     startCapture () {
       this.$store.dispatch('capture')
+    }
+  },
+  watch: {
+    mediaStream: function (mediaStream) {
+      this.$refs.preview.srcObject = mediaStream
     }
   },
   mounted: function () {
