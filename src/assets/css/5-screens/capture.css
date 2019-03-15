@@ -48,8 +48,13 @@
   box-shadow: var(--focus-ring);
 }
 
-/* Capturing state */
+.capture-btn:disabled {
+  background: grey;
+  opacity: .2;
+  cursor: not-allowed;
+}
 
+/* Capturing state */
 
 .capture-btn--capturing {
   position: relative;
