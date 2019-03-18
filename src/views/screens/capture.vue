@@ -42,14 +42,18 @@ export default {
   methods: {
     startCapture () {
       this.$store.dispatch('capture')
+    },
+    updatePreviewMediaStream() {
+      this.$refs.preview.srcObject = this.mediaStream
     }
   },
   watch: {
     mediaStream: function (mediaStream) {
-      this.$refs.preview.srcObject = mediaStream
+      this.updatePreviewMediaStream()
     }
   },
   mounted: function () {
+    this.updatePreviewMediaStream()
     window.objectFitPolyfill(this.$refs.preview)
     document.body.classList.add('capture-body')
   },
