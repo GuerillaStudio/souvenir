@@ -9,7 +9,7 @@
       <video ref="preview" class="preview-visual" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
-    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" @click.prevent="startCapture" :disabled="!mediaStream">Capture</button>
+    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" :disabled="!mediaStream" @click.prevent="startCapture">Capture</button>
 
     <encoding-overlay v-if="encoding.status"></encoding-overlay>
   </div>
@@ -20,7 +20,7 @@ import captureOptions from '/views/components/capture-options'
 import captureProgress from '/views/components/capture-progress'
 import encodingOverlay from '/views/components/encoding'
 
-import objectFitPolyfill from 'objectFitPolyfill'
+import 'objectFitPolyfill'
 
 import { mapState } from 'vuex'
 
@@ -53,7 +53,7 @@ export default {
         this.ensureCameraStarted()
       }
     },
-    updatePreviewMediaStream() {
+    updatePreviewMediaStream () {
       this.$refs.preview.srcObject = this.mediaStream
     }
   },
@@ -69,7 +69,6 @@ export default {
     window.objectFitPolyfill(this.$refs.preview)
 
     this.ensureCameraStarted()
-
   },
   updated: function () {
     this.updatePreviewMediaStream()

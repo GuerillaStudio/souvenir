@@ -44,43 +44,43 @@ export default new Vuex.Store({
 
       state.mediaStream = null
     },
-    inverseFacingMode (store) {
-      store.capturing.shouldFaceUser = !store.capturing.shouldFaceUser
+    inverseFacingMode (state) {
+      state.capturing.shouldFaceUser = !state.capturing.shouldFaceUser
     },
-    updateTimer (store, time) {
-      store.timer.selected = time
+    updateTimer (state, time) {
+      state.timer.selected = time
     },
-    startCapture (store) {
-      store.capturing.status = true
+    startCapture (state) {
+      state.capturing.status = true
     },
-    stopCapture (store) {
-      store.capturing.status = false
+    stopCapture (state) {
+      state.capturing.status = false
     },
-    updateCaptureState (store, percent) {
-      store.capturing.state = percent
+    updateCaptureState (state, percent) {
+      state.capturing.state = percent
     },
-    startEncoding (store) {
-      store.encoding.status = true
+    startEncoding (state) {
+      state.encoding.status = true
     },
-    stopEncoding (store) {
-      store.encoding.status = false
+    stopEncoding (state) {
+      state.encoding.status = false
     },
-    updateEncodingState (store, percent) {
-      store.encoding.state = percent
+    updateEncodingState (state, percent) {
+      state.encoding.state = percent
     },
-    startDownloading (store, objectUrl) {
-      store.downloading.status = true
-      store.downloading.objectUrl = objectUrl
-      store.downloading.timestamp = Date.now()
+    startDownloading (state, objectUrl) {
+      state.downloading.status = true
+      state.downloading.objectUrl = objectUrl
+      state.downloading.timestamp = Date.now()
     },
-    stopDownloading (store) {
-      if (store.downloading.objectUrl) {
-        URL.revokeObjectURL(store.downloading.objectUrl)
+    stopDownloading (state) {
+      if (state.downloading.objectUrl) {
+        URL.revokeObjectURL(state.downloading.objectUrl)
       }
 
-      store.downloading.status = false
-      store.downloading.objectUrl = null
-      store.downloading.timestamp = null
+      state.downloading.status = false
+      state.downloading.objectUrl = null
+      state.downloading.timestamp = null
     }
   },
   actions: {
@@ -112,7 +112,7 @@ export default new Vuex.Store({
           commit('updateWelcomed', false)
         })
     },
-    capture ({ commit, dispatch, state }) {
+    capture ({ state, commit, dispatch }) {
       commit('startCapture')
       const capturing = capture(state.mediaStream, state.timer.selected * 1000)
 

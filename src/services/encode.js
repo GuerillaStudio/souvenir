@@ -1,7 +1,5 @@
 import EventEmitter from 'eventemitter3'
 import genericPool from 'generic-pool'
-import pEvent from 'p-event'
-import { write } from '/services/encode-core.js'
 import { promisesProgress, calcProgress } from '/services/util.js'
 
 import { GIF_PALETTE_SIZE } from '/constants.js'
@@ -16,7 +14,6 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
     min: 0,
     max: 2
   })
-
 
   const indexedColorImagesP = imageDataList
     .map(async imageData => {
@@ -77,7 +74,7 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
       delayTime
     })
   })
-  .catch(error => emitter.emit('error', error))
+    .catch(error => emitter.emit('error', error))
 
   return emitter
 }

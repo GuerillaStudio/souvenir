@@ -47,7 +47,7 @@ export function capture (mediaStream, duration) {
 
     step()
 
-    function step() {
+    function step () {
       canvasContext.drawImage(
         video,
         soureRectangle.x,
@@ -83,7 +83,7 @@ export function capture (mediaStream, duration) {
       }
     }
   })
-  .catch(error => emitter.emit('error', error))
+    .catch(error => emitter.emit('error', error))
 
-  return emitter;
+  return emitter
 }
