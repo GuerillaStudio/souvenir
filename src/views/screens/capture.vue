@@ -57,6 +57,9 @@ export default {
     window.objectFitPolyfill(this.$refs.preview)
     document.body.classList.add('capture-body')
   },
+  updated: function () {
+    this.updatePreviewMediaStream()
+  },
   destroyed: function () {
     document.body.classList.remove('capture-body')
   }
