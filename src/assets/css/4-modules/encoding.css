@@ -63,7 +63,7 @@
 .encoding-progressBar__state {
   height: .5rem;
   background: linear-gradient(91.78deg, var(--color-primary) 0%,var(--color-secondary) 100%);
-  transition: 1s all ease-in-out;
+  transition: .3s all ease-in-out;
 }
 
 .encoding-percent {
