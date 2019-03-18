@@ -84,10 +84,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    welcome ({ commit, dispatch }) {
-      commit('updateWelcomed', true)
-      dispatch('requestCamera', false)
-    },
     requestCamera ({ state, commit }, inverseFacingMode) {
       const shouldFaceUser = inverseFacingMode
         ? !state.capturing.shouldFaceUser
@@ -136,10 +132,7 @@ export default new Vuex.Store({
 
       encoding.once('error', error => console.error(error))
 
-      encoding.on('progress', value => {
-        console.log(`Encoding progress ${Math.round(value * 100)}% (${value})`)
-        commit('updateEncodingState', Math.round(value * 100))
-      })
+      encoding.on('progress', value => commit('updateEncodingState', Math.round(value * 100)))
 
       encoding.once('done', objectUrl => {
         commit('stopEncoding')

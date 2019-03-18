@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     welcome () {
-      this.$store.dispatch('welcome')
+      this.$store.commit('updateWelcomed', true)
     }
   }
 }

@@ -43,6 +43,16 @@ export default {
     startCapture () {
       this.$store.dispatch('capture')
     },
+    ensureCameraStarted () {
+      if (!this.mediaStream) {
+        this.$store.dispatch('requestCamera', false)
+      }
+    },
+    handleVisibilityChange (event) {
+      if (!document.hidden) {
+        this.ensureCameraStarted()
+      }
+    },
     updatePreviewMediaStream() {
       this.$refs.preview.srcObject = this.mediaStream
     }
@@ -54,14 +64,19 @@ export default {
   },
   mounted: function () {
     this.updatePreviewMediaStream()
-    window.objectFitPolyfill(this.$refs.preview)
+    document.addEventListener('visibilitychange', this.handleVisibilityChange)
     document.body.classList.add('capture-body')
+    window.objectFitPolyfill(this.$refs.preview)
+
+    this.ensureCameraStarted()
+
   },
   updated: function () {
     this.updatePreviewMediaStream()
   },
   destroyed: function () {
     document.body.classList.remove('capture-body')
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange)
   }
 }
 </script>

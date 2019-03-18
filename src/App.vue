@@ -31,10 +31,6 @@ export default {
     handleVisibilityChange (event) {
       if (document.hidden) {
         this.$store.commit('stopCamera')
-      } else {
-        if (this.welcomed) {
-          this.$store.dispatch('requestCamera', false)
-        }
       }
     }
   },
