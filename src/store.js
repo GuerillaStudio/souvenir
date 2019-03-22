@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { getCamera } from '/services/camera.js'
 import { capture } from '/services/capture.js'
 import { encode } from '/services/encode.js'
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   state: {
     welcomed: false,
     mediaStream: null,
+    facingMode: null,
     timer: {
       selected: 2,
       list: [2, 3, 5]
@@ -34,8 +36,9 @@ export default new Vuex.Store({
     updateWelcomed (state, welcome) {
       state.welcomed = welcome
     },
-    startCamera (state, mediaStream) {
+    startCamera (state, { mediaStream, facingMode }) {
       state.mediaStream = mediaStream
+      state.facingMode = facingMode
     },
     stopCamera (state) {
       if (state.mediaStream) {
@@ -43,6 +46,10 @@ export default new Vuex.Store({
       }
 
       state.mediaStream = null
+      state.facingMode = null
+    },
+    updateFacingMode (state, facingMode) {
+      state.facingMode = facingMode
     },
     inverseFacingMode (state) {
       state.capturing.shouldFaceUser = !state.capturing.shouldFaceUser
@@ -84,37 +91,28 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    requestCamera ({ state, commit }, inverseFacingMode) {
+    async requestCamera ({ state, commit }, inverseFacingMode) {
+      commit('stopCamera')
+
       const shouldFaceUser = inverseFacingMode
         ? !state.capturing.shouldFaceUser
         : state.capturing.shouldFaceUser
 
-      const constraints = {
-        video: {
-          facingMode: shouldFaceUser ? 'user' : 'environment'
-        },
-        audio: false
+      try {
+        commit('startCamera', await getCamera(shouldFaceUser))
+
+        if (inverseFacingMode) {
+          commit('inverseFacingMode')
+        }
+      } catch (error) {
+        console.error(error)
+        window.alert('You haven\'t allowed to use your camera.\n\nOr maybe your browser is not compatible :(')
+        commit('updateWelcomed', false)
       }
-
-      commit('stopCamera')
-
-      navigator.mediaDevices.getUserMedia(constraints)
-        .then(mediaStream => {
-          commit('startCamera', mediaStream)
-
-          if (inverseFacingMode) {
-            commit('inverseFacingMode')
-          }
-        })
-        .catch(error => {
-          console.error(error)
-          window.alert('You haven\'t allowed to use your camera.\n\nOr maybe your browser is not compatible :(')
-          commit('updateWelcomed', false)
-        })
     },
     capture ({ state, commit, dispatch }) {
       commit('startCapture')
-      const capturing = capture(state.mediaStream, state.timer.selected * 1000)
+      const capturing = capture(state.mediaStream, state.timer.selected * 1000, state.facingMode)
 
       capturing.once('error', error => console.error(error))
 

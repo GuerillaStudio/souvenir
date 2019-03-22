@@ -8,7 +8,7 @@ import {
   GIF_FRAME_RATE
 } from '/constants.js'
 
-export function capture (mediaStream, duration) {
+export function capture (mediaStream, duration, facingMode) {
   const emitter = new EventEmitter()
 
   Promise.resolve().then(async () => {
@@ -33,8 +33,14 @@ export function capture (mediaStream, duration) {
     canvas.width = GIF_WIDTH
     canvas.height = GIF_HEIGHT
 
-    const canvasContext = canvas.getContext('2d')
     const destinationRectangle = makeRectangle(0, 0, canvas.width, canvas.height)
+
+    const canvasContext = canvas.getContext('2d')
+
+    if (facingMode === 'user' || facingMode === 'unknow') {
+      canvasContext.translate(destinationRectangle.width, 0)
+      canvasContext.scale(-1, 1)
+    }
 
     const video = document.createElement('video')
     video.setAttribute('playsinline', '')

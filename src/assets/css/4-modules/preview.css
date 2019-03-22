@@ -49,6 +49,10 @@
   content: none;
 }
 
+.preview--flip {
+  transform: scaleX(-1);
+}
+
 .preview-visual {
   position: absolute;
   top: 0;

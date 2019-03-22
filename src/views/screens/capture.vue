@@ -6,7 +6,7 @@
     <capture-options v-else></capture-options>
 
     <div class="preview">
-      <video ref="preview" class="preview-visual" preload="yes" autoplay muted playsinline webkit-playsinline></video>
+      <video ref="preview" class="preview-visual" :class="{ 'preview--flip': flipActive }" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
     <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing.status }" :disabled="!mediaStream" @click.prevent="startCapture">Capture</button>
@@ -34,10 +34,14 @@ export default {
   computed: {
     ...mapState([
       'mediaStream',
+      'facingMode',
       'capturing',
       'timer',
       'encoding'
-    ])
+    ]),
+    flipActive () {
+      return this.facingMode === 'user' || this.facingMode === 'unknow'
+    }
   },
   methods: {
     startCapture () {
