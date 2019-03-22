@@ -2,6 +2,7 @@
   "name": "souvenir",
   "version": "0.1.0",
   "private": true,
+  "license": "Copyleft",
   "scripts": {
     "serve": "parcel src/index.html",
     "build": "parcel build src/index.html",

@@ -32,3 +32,7 @@ npm run lint
 ```
 npm run lint-fix
 ```
+
+### License
+
+The project is under Copyleft
