@@ -9,10 +9,11 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
     cameraShouldFaceUser: true,
-    timer: {
+    duration: {
       selected: 2,
       list: [2, 3, 5]
     },
+    boomerang: false,
     camera: null,
     capture: null,
     gif: null,
@@ -22,14 +23,16 @@ export default new Vuex.Store({
     updateCameraShouldFaceUser (state, cameraShouldFaceUser) {
       state.cameraShouldFaceUser = cameraShouldFaceUser
     },
-    updateTimer (state, time) {
-      state.timer.selected = time
+    updateDuration (state, time) {
+      state.duration.selected = time
+    },
+    updateBoomerang (state, value) {
+      state.boomerang = value
     },
     updateCamera (state, camera) {
       if (state.camera) {
         state.camera.mediaStream.getTracks().forEach(track => track.stop())
       }
-
       state.camera = camera
     },
     updateCapture (state, capture) {

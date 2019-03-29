@@ -18,15 +18,23 @@
   height: 11rem;
 }
 
+/* Capture actions
+-------------------------------------------------------------- */
+
+.capture-actions {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: 4rem;
+}
+
 /* Capture button
 -------------------------------------------------------------- */
 
 .capture-btn,
 .capture-btn:visited {
   position: relative;
-  align-self: center;
-  margin-top: auto;
-  margin-bottom: 4rem;
   padding: 0;
   width: 8rem;
   height: 8rem;
@@ -82,4 +90,25 @@
   100% {
     transform: rotate(359deg);
   }
+}
+
+/* Switch button
+-------------------------------------------------------------- */
+
+.capture-switch,
+.capture-switch:visited {
+  position: absolute;
+  top: calc(50% - 3rem);
+  right: 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: #fff;
+  line-height: 1;
+}
+
+.capture-switch svg {
+  width: 3rem;
+  height: 3rem;
 }

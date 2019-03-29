@@ -9,7 +9,10 @@
       <video ref="preview" class="preview-visual" :class="{ 'preview--flip': shouldFlip }" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
-    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
+    <div class="capture-actions">
+      <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
+      <button class="capture-switch" title="Switch camera" @click="switchCamera"><icon-switch></icon-switch></button>
+    </div>
   </div>
 </template>
 
@@ -22,11 +25,14 @@ import 'objectFitPolyfill'
 
 import { mapState } from 'vuex'
 
+import iconSwitch from '/views/icons/ico-switch'
+
 export default {
   name: 'capture',
   components: {
     captureOptions,
-    captureProgress
+    captureProgress,
+    iconSwitch
   },
   data: () => ({
     capturing: false,
@@ -35,7 +41,7 @@ export default {
   computed: {
     ...mapState([
       'camera',
-      'timer',
+      'duration',
       'capture'
     ]),
     shouldFlip () {
@@ -57,9 +63,12 @@ export default {
     }
   },
   methods: {
+    switchCamera () {
+      this.$store.dispatch('requestCamera', true)
+    },
     startCapturing () {
       this.capturing = true
-      const capturing = capture(this.camera, this.timer.selected * 1000)
+      const capturing = capture(this.camera, this.duration.selected * 1000)
 
       capturing.once('error', error => {
         console.error(error)

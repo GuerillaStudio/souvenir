@@ -54,9 +54,17 @@
     align-self: center;
   }
 
-  .capture-btn {
+  .capture-actions {
+    flex-direction: column;
     flex-shrink: .0;
     margin: 0 auto;
+  }
+
+  .capture-switch,
+  .capture-switch:visited {
+    position: absolute;
+    top: 0;
+    right: calc(50% - 3rem);
   }
 
   /* Options

@@ -1,9 +1,6 @@
 <template lang="html">
   <div class="download">
-    <div class="options">
-      <span></span>
-      <button class="options__btn" @click="back">← back</button>
-    </div>
+    <capture-options :disabled-time="true" :back-btn="back"></capture-options>
 
     <div class="preview">
       <canvas ref="previewCanvas" class="preview-visual"></canvas>
@@ -18,6 +15,7 @@
 <script>
 import { encode } from '/services/encode.js'
 import encodingOverlay from '/views/components/encoding'
+import captureOptions from '/views/components/capture-options'
 import { cycle } from '/services/util.js'
 
 import { mapState } from 'vuex'
@@ -25,7 +23,8 @@ import { mapState } from 'vuex'
 export default {
   name: 'preview',
   components: {
-    encodingOverlay
+    encodingOverlay,
+    captureOptions
   },
   data: () => ({
     encoding: false,
@@ -35,7 +34,8 @@ export default {
   computed: {
     ...mapState([
       'camera',
-      'capture'
+      'capture',
+      'boomerang'
     ])
   },
   methods: {
@@ -54,7 +54,11 @@ export default {
         canvas.height = this.capture.imageHeight
         const canvasContext = canvas.getContext('2d')
 
-        const imagesIterator = cycle(this.capture.imageDataList)
+        const frames = this.boomerang
+          ? [...this.capture.imageDataList, ...this.capture.imageDataList.slice(1, this.capture.imageDataList.length - 1).reverse()]
+          : this.capture.imageDataList
+
+        const imagesIterator = cycle(frames)
         const delay = this.capture.delayTime
 
         this.previewInterval = setInterval(() => {
@@ -74,9 +78,12 @@ export default {
         }, delay)
       }
     },
+    stopPreview () {
+      window.clearInterval(this.previewInterval)
+    },
     startEncoding () {
       this.encoding = true
-      const encoding = encode(this.capture, { boomerangEffect: false })
+      const encoding = encode(this.capture, { boomerangEffect: this.boomerang })
 
       encoding.once('error', error => {
         console.error(error)
@@ -96,6 +103,12 @@ export default {
       })
     }
   },
+  watch: {
+    boomerang: function () {
+      this.stopPreview()
+      this.startPreview()
+    }
+  },
   created () {
     if (!this.capture) {
       this.backHome()
@@ -105,7 +118,7 @@ export default {
     this.startPreview()
   },
   destroyed () {
-    window.clearInterval(this.previewInterval)
+    this.stopPreview()
   }
 }
 </script>
