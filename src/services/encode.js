@@ -4,7 +4,7 @@ import { promisesProgress, calcProgress } from '/services/util.js'
 
 import { GIF_PALETTE_SIZE } from '/constants.js'
 
-export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
+export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, { boomerangEffect }) {
   const emitter = new EventEmitter()
 
   const quantizeColorWorkerPool = genericPool.createPool({
@@ -74,7 +74,8 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
       imageWidth,
       imageHeight,
       indexedColorImages,
-      delayTime
+      delayTime,
+      boomerangEffect
     })
   })
     .catch(error => emitter.emit('error', error))

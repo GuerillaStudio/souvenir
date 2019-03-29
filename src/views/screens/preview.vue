@@ -76,7 +76,7 @@ export default {
     },
     startEncoding () {
       this.encoding = true
-      const encoding = encode(this.capture)
+      const encoding = encode(this.capture, { boomerangEffect: false })
 
       encoding.once('error', error => {
         console.error(error)

@@ -22,7 +22,7 @@ class OutputStream {
   }
 }
 
-export function write (imageWidth, imageHeight, delay, indexedColorImages) {
+export function write (imageWidth, imageHeight, delay, indexedColorImages, boomerangEffect = false) {
   const emitter = new EventEmitter()
 
   // yup, this is the browser nextTick implementation we are waiting for :facepalm:
@@ -41,7 +41,11 @@ export function write (imageWidth, imageHeight, delay, indexedColorImages) {
 
     writer.writeLoopControlInfo(0)
 
-    indexedColorImages.forEach((indexedColorImage, index, { length }) => {
+    const frames = boomerangEffect
+      ? [...indexedColorImages, ...indexedColorImages.slice(1, indexedColorImages.length - 1).reverse()]
+      : indexedColorImages
+
+    frames.forEach((indexedColorImage, index, { length }) => {
       writer.writeTableBasedImageWithGraphicControl(indexedColorImage, { delayTimeInMS: delay })
       emitter.emit('progress', calcProgress(0, 0.99, (index + 1) / length))
     })
