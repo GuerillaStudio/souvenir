@@ -55,10 +55,7 @@
 
   .capture-btn {
     flex-shrink: .0;
-    margin-top: 0;
-    margin-right: 2rem;
-    margin-bottom: 0;
-    margin-left: auto;
+    margin: 0 auto;
   }
 
   /* Options
