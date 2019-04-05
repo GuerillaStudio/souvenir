@@ -98,16 +98,9 @@ export default new Vuex.Store({
         ? !state.capturing.shouldFaceUser
         : state.capturing.shouldFaceUser
 
-      try {
-        commit('startCamera', await getCamera(shouldFaceUser))
-
-        if (inverseFacingMode) {
-          commit('inverseFacingMode')
-        }
-      } catch (error) {
-        console.error(error)
-        window.alert('You haven\'t allowed to use your camera.\n\nOr maybe your browser is not compatible :(')
-        commit('updateWelcomed', false)
+      commit('startCamera', await getCamera(shouldFaceUser))
+      if (inverseFacingMode) {
+        commit('inverseFacingMode')
       }
     },
     capture ({ state, commit, dispatch }) {

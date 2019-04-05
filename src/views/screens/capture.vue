@@ -49,9 +49,15 @@ export default {
       await this.$store.dispatch('encode', captureData)
       this.$router.push({ name: 'download' })
     },
-    ensureCameraStarted () {
+    async ensureCameraStarted () {
       if (!this.mediaStream) {
-        this.$store.dispatch('requestCamera', false)
+        try {
+          await this.$store.dispatch('requestCamera', false)
+        } catch (error) {
+          console.error(error)
+          window.alert('You haven\'t allowed to use your camera.\n\nOr maybe your browser is not compatible :(')
+          this.$router.push({ name: 'home' })
+        }
       }
     },
     handleVisibilityChange (event) {
