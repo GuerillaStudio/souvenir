@@ -26,6 +26,7 @@ export default {
   methods: {
     back () {
       this.$store.commit('stopDownloading')
+      this.$router.push({ name: 'capture' })
     }
   }
 }

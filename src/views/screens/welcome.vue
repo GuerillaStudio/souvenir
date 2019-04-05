@@ -9,7 +9,7 @@
         <li class="welcome-steps__item">Save as a GIF</li>
       </ol>
     </div>
-    <button class="btn btn--primary" @click="welcome">Let's make a souvenir!</button>
+    <button class="btn btn--primary" @click="startCapture">Let's make a souvenir!</button>
   </div>
 </template>
 
@@ -22,8 +22,8 @@ export default {
     illuWelcome
   },
   methods: {
-    welcome () {
-      this.$store.commit('updateWelcomed', true)
+    startCapture () {
+      this.$router.push({ name: 'capture' })
     }
   }
 }

@@ -111,31 +111,42 @@ export default new Vuex.Store({
       }
     },
     capture ({ state, commit, dispatch }) {
-      commit('startCapture')
-      const capturing = capture(state.mediaStream, state.timer.selected * 1000, state.facingMode)
+      return new Promise((resolve, reject) => {
+        commit('startCapture')
+        const capturing = capture(state.mediaStream, state.timer.selected * 1000, state.facingMode)
 
-      capturing.once('error', error => console.error(error))
+        capturing.once('error', error => {
+          console.error(error)
+          reject(error)
+        })
 
-      capturing.on('progress', value => commit('updateCaptureState', Math.round(value * 100)))
+        capturing.on('progress', value => commit('updateCaptureState', Math.round(value * 100)))
 
-      capturing.once('done', captureData => {
-        commit('stopCapture')
-        commit('updateCaptureState', 0)
-        dispatch('encode', captureData)
+        capturing.once('done', captureData => {
+          commit('stopCapture')
+          commit('updateCaptureState', 0)
+          resolve(captureData)
+        })
       })
     },
     encode ({ commit }, captureData) {
-      commit('startEncoding')
-      const encoding = encode(captureData)
+      return new Promise((resolve, reject) => {
+        commit('startEncoding')
+        const encoding = encode(captureData)
 
-      encoding.once('error', error => console.error(error))
+        encoding.once('error', error => {
+          console.error(error)
+          reject(error)
+        })
 
-      encoding.on('progress', value => commit('updateEncodingState', Math.round(value * 100)))
+        encoding.on('progress', value => commit('updateEncodingState', Math.round(value * 100)))
 
-      encoding.once('done', objectUrl => {
-        commit('stopEncoding')
-        commit('updateEncodingState', 0)
-        commit('startDownloading', objectUrl)
+        encoding.once('done', objectUrl => {
+          commit('stopEncoding')
+          commit('updateEncodingState', 0)
+          commit('startDownloading', objectUrl)
+          resolve(objectUrl)
+        })
       })
     }
   }

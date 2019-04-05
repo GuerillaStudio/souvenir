@@ -44,8 +44,10 @@ export default {
     }
   },
   methods: {
-    startCapture () {
-      this.$store.dispatch('capture')
+    async startCapture () {
+      const captureData = await this.$store.dispatch('capture')
+      await this.$store.dispatch('encode', captureData)
+      this.$router.push({ name: 'download' })
     },
     ensureCameraStarted () {
       if (!this.mediaStream) {

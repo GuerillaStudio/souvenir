@@ -10,21 +10,22 @@
     "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
-    "@babel/runtime": "^7.3.4",
+    "@babel/runtime": "^7.4.3",
     "eventemitter3": "^3.1.0",
     "generic-pool": "^3.6.1",
     "gif-writer": "^0.9.3",
     "objectFitPolyfill": "^2.1.1",
     "p-event": "^4.0.0",
     "postcss-modules": "^1.4.1",
-    "vue": "^2.6.6",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.4.3",
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@vue/component-compiler-utils": "^2.6.0",
-    "autoprefixer": "^9.4.10",
+    "autoprefixer": "^9.5.0",
     "eslint": "^5.15.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
@@ -32,11 +33,11 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.2.2",
-    "parcel-bundler": "^1.12.0",
+    "parcel-bundler": "^1.12.3",
     "parcel-plugin-static-files-copy": "^2.0.0",
     "parcel-plugin-sw-precache": "^1.0.4",
     "vue-hot-reload-api": "^2.3.3",
-    "vue-template-compiler": "^2.6.8"
+    "vue-template-compiler": "^2.6.10"
   },
   "staticFiles": {
     "staticPath": "public",
