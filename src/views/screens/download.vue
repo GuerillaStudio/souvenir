@@ -28,6 +28,14 @@ export default {
       this.$store.commit('stopDownloading')
       this.$router.push({ name: 'capture' })
     }
+  },
+  created () {
+    if (this.downloading.objectUrl === null) {
+      this.$router.push({ name: 'home' })
+    }
+  },
+  destroyed () {
+    this.$store.commit('stopDownloading')
   }
 }
 </script>
