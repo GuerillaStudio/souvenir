@@ -1,18 +1,19 @@
 <template lang="html">
   <div class="progressBar">
-    <div class="progressBar__state" :style="'width: ' + capturing.state + '%;'"></div>
+    <div class="progressBar__state" :style="'width: ' + percentage + '%;'"></div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'progressBar',
+  props: {
+    value: Number
+  },
   computed: {
-    ...mapState([
-      'capturing'
-    ])
+    percentage () {
+      return this.value * 100
+    }
   }
 }
 </script>

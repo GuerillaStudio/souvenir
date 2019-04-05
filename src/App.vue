@@ -5,20 +5,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'souvenir',
-  computed: {
-    ...mapState([
-      'welcomed',
-      'downloading'
-    ])
-  },
   methods: {
     handleVisibilityChange (event) {
       if (document.hidden) {
-        this.$store.commit('stopCamera')
+        this.$store.commit('updateCamera', null)
       }
     }
   },

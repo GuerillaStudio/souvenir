@@ -8,7 +8,7 @@ import {
   GIF_FRAME_RATE
 } from '/constants.js'
 
-export function capture (mediaStream, duration, facingMode) {
+export function capture ({ mediaStream, facingMode }, duration) {
   const emitter = new EventEmitter()
 
   Promise.resolve().then(async () => {

@@ -6,10 +6,10 @@
     </div>
 
     <div class="preview preview--novideo">
-      <img class="preview-visualImg" :src="downloading.objectUrl" alt="">
+      <img class="preview-visualImg" :src="objectUrl" alt="">
     </div>
 
-    <a class="download-btn btn btn--primary w100" :href="downloading.objectUrl" :download="`souvenir${downloading.timestamp}.gif`">Download GIF</a>
+    <a class="download-btn btn btn--primary w100" :href="objectUrl" :download="`souvenir${timestamp}.gif`">Download GIF</a>
   </div>
 </template>
 
@@ -18,24 +18,31 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'download',
+  data: () => ({
+    objectUrl: null
+  }),
   computed: {
     ...mapState([
-      'downloading'
-    ])
+      'gif'
+    ]),
+    timestamp () {
+      return this.gif.createdAt.getTime()
+    }
   },
   methods: {
     back () {
-      this.$store.commit('stopDownloading')
       this.$router.push({ name: 'capture' })
     }
   },
   created () {
-    if (this.downloading.objectUrl === null) {
+    if (!this.gif) {
       this.$router.push({ name: 'home' })
     }
+
+    this.objectUrl = URL.createObjectURL(this.gif.blob)
   },
   destroyed () {
-    this.$store.commit('stopDownloading')
+    URL.revokeObjectURL(this.objectUrl)
   }
 }
 </script>

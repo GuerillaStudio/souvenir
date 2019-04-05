@@ -61,8 +61,11 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }) {
         case 'done':
           const byteArray = new Uint8Array(payload.buffer)
           const blob = new Blob([byteArray], { type: 'image/gif' })
-          const objectUrl = URL.createObjectURL(blob)
-          emitter.emit('done', objectUrl)
+
+          emitter.emit('done', {
+            blob,
+            createdAt: new Date()
+          })
           break
       }
     }

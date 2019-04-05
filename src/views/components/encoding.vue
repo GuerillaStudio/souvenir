@@ -5,21 +5,25 @@
     </div>
     <div class="encoding-label">Encoding</div>
     <div class="encoding-progressBar">
-      <div class="encoding-progressBar__state" :style="'width: ' + encoding.state + '%;'"></div>
+      <div class="encoding-progressBar__state" :style="'width: ' + percentage + '%;'"></div>
     </div>
-    <div class="encoding-percent">{{ encoding.state }}%</div>
+    <div class="encoding-percent">{{ roundedPercentage }}%</div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'encodingOverlay',
+  props: {
+    value: Number
+  },
   computed: {
-    ...mapState([
-      'encoding'
-    ])
+    percentage () {
+      return this.value * 100
+    },
+    roundedPercentage () {
+      return Math.round(this.percentage)
+    }
   }
 }
 </script>
