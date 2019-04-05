@@ -9,18 +9,14 @@
       <video ref="preview" class="preview-visual" :class="{ 'preview--flip': shouldFlip }" preload="yes" autoplay muted playsinline webkit-playsinline></video>
     </div>
 
-    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera || encoding" @click.prevent="startCapturing">Capture</button>
-
-    <encoding-overlay v-if="encoding" :value="encodingProgress"></encoding-overlay>
+    <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
   </div>
 </template>
 
 <script>
 import captureOptions from '/views/components/capture-options'
 import captureProgress from '/views/components/capture-progress'
-import encodingOverlay from '/views/components/encoding'
 import { capture } from '/services/capture.js'
-import { encode } from '/services/encode.js'
 
 import 'objectFitPolyfill'
 
@@ -30,14 +26,11 @@ export default {
   name: 'capture',
   components: {
     captureOptions,
-    captureProgress,
-    encodingOverlay
+    captureProgress
   },
   data: () => ({
     capturing: false,
-    capturingProgress: 0,
-    encoding: false,
-    encodingProgress: 0
+    capturingProgress: 0
   }),
   computed: {
     ...mapState([
@@ -82,28 +75,8 @@ export default {
         this.capturing = false
         this.capturingProgress = 0
         this.$store.commit('updateCapture', captureData)
-        this.startEncoding()
-      })
-    },
-    startEncoding () {
-      this.encoding = true
-      const encoding = encode(this.capture)
-
-      encoding.once('error', error => {
-        console.error(error)
-        this.encoding = false
-        this.encodingProgress = 0
-      })
-
-      encoding.on('progress', value => {
-        this.encodingProgress = value
-      })
-
-      encoding.once('done', gif => {
-        this.encoding = false
-        this.encodingProgress = 0
-        this.$store.commit('updateGif', gif)
-        this.$router.push({ name: 'download' })
+        this.$router.push({ name: 'preview' })
+        // this.startEncoding()
       })
     },
     async ensureCamera () {

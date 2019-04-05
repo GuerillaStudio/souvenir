@@ -56,6 +56,45 @@
   background: var(--btn-primary);
 }
 
+/* Loading state
+-------------------------------------------------------------- */
+
+.btn--loading,
+.btn--loading:link,
+.btn--loading:visited {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn--loading svg {
+  display: none;
+}
+
+.btn--loading::after {
+  position: absolute;
+  top: calc(50% - (2em / 2));
+  left: calc(50% - (2em / 2));
+  display: block;
+  width: 2em;
+  height: 2em;
+  border: .2rem solid transparent;
+  border-color: transparent transparent #fff #fff;
+  border-radius: 42rem;
+  content: "";
+  animation: spinAround 500ms infinite linear;
+}
+
+@keyframes spinAround {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+
 /* size
 -------------------------------------------------------------- */
 

@@ -26,7 +26,10 @@ export default {
       'gif'
     ]),
     timestamp () {
-      return this.gif.createdAt.getTime()
+      if (this.gif) {
+        return this.gif.createdAt.getTime()
+      }
+      return null
     }
   },
   methods: {
@@ -37,9 +40,9 @@ export default {
   created () {
     if (!this.gif) {
       this.$router.push({ name: 'home' })
+    } else {
+      this.objectUrl = URL.createObjectURL(this.gif.blob)
     }
-
-    this.objectUrl = URL.createObjectURL(this.gif.blob)
   },
   destroyed () {
     URL.revokeObjectURL(this.objectUrl)
