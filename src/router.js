@@ -8,6 +8,7 @@ import Download from '/views/screens/download'
 Vue.use(VueRouter)
 
 export default new VueRouter({
+  mode: 'history',
   routes: [
     { name: 'home', path: '/', component: Welcome },
     { name: 'capture', path: '/capture', component: Capture },
