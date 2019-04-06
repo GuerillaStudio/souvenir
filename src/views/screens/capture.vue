@@ -76,7 +76,6 @@ export default {
         this.capturingProgress = 0
         this.$store.commit('updateCapture', captureData)
         this.$router.push({ name: 'preview' })
-        // this.startEncoding()
       })
     },
     async ensureCamera () {

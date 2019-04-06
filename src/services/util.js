@@ -1,14 +1,6 @@
-export function delay(duration) {
-  return new Promise((resolve, _) => {
-    setTimeout(() => {
-      resolve()
-    }, duration)
-  })
-}
-
-export function* cycle(xs) {
+export function * cycle (xs) {
   while (true) {
-      yield* xs
+    yield * xs
   }
 }
 

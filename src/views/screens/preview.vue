@@ -18,6 +18,7 @@
 <script>
 import { encode } from '/services/encode.js'
 import encodingOverlay from '/views/components/encoding'
+import { cycle } from '/services/util.js'
 
 import { mapState } from 'vuex'
 
@@ -29,7 +30,7 @@ export default {
   data: () => ({
     encoding: false,
     encodingProgress: 0,
-    previewTimeout: null
+    previewInterval: null
   }),
   computed: {
     ...mapState([
@@ -44,16 +45,6 @@ export default {
     backHome () {
       this.$router.push({ name: 'home' })
     },
-    printPreview (context, frameNumber) {
-      this.previewTimeout = setTimeout(() => {
-        // Looper
-        frameNumber < (this.capture.imageDataList.length - 1) ? frameNumber++ : frameNumber = 0
-        // Printer
-        const image = this.capture.imageDataList[frameNumber]
-        context.putImageData(image, 0, 0)
-        this.printPreview(context, frameNumber)
-      }, this.capture.delayTime)
-    },
     startPreview () {
       if (!this.capture) {
         this.backHome()
@@ -63,7 +54,24 @@ export default {
         canvas.height = this.capture.imageHeight
         const canvasContext = canvas.getContext('2d')
 
-        this.printPreview(canvasContext, 0)
+        const imagesIterator = cycle(this.capture.imageDataList)
+        const delay = this.capture.delayTime
+
+        this.previewInterval = setInterval(() => {
+          const {
+            value: image,
+            done
+          } = imagesIterator.next()
+
+          if (image) {
+            canvasContext.putImageData(image, 0, 0)
+          }
+
+          if (done) {
+            clearInterval(this.previewInterval)
+            this.previewInterval = null
+          }
+        }, delay)
       }
     },
     startEncoding () {
@@ -97,7 +105,7 @@ export default {
     this.startPreview()
   },
   destroyed () {
-    window.clearTimeout(this.previewTimeout)
+    window.clearInterval(this.previewInterval)
   }
 }
 </script>
