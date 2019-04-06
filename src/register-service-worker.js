@@ -1,3 +1,4 @@
+import store from '/store'
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -57,6 +58,7 @@ function registerValidSW (swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.')
+              store.commit('updateRefreshBanner', true)
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a

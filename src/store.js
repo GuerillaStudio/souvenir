@@ -15,7 +15,8 @@ export default new Vuex.Store({
     },
     camera: null,
     capture: null,
-    gif: null
+    gif: null,
+    needRefresh: false
   },
   mutations: {
     updateCameraShouldFaceUser (state, cameraShouldFaceUser) {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     updateGif (state, gif) {
       state.gif = gif
+    },
+    updateRefreshBanner (state, value) {
+      state.needRefresh = value
     }
   },
   actions: {
