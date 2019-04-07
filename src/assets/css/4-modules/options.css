@@ -20,6 +20,7 @@
 .options__select,
 .options__btn {
   appearance: none;
+  margin: 0;
   padding: 2rem;
   border: .1rem solid transparent;
   border-radius: .3rem;
@@ -101,6 +102,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
   padding: 0;
   width: 50%;
   border: none;
