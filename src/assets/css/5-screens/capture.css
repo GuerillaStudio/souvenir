@@ -98,14 +98,15 @@
 .capture-switch,
 .capture-switch:visited {
   position: absolute;
-  top: calc(50% - 3rem);
+  top: calc(50% - 2.5rem);
   right: 0;
+  display: block;
   padding: 1rem;
   border: none;
   border-radius: 0;
   background-color: transparent;
   color: #fff;
-  line-height: 1;
+  line-height: 0;
 }
 
 .capture-switch svg {

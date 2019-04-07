@@ -92,7 +92,7 @@
 }
 
 .options__panel.active {
-  transform: translateY(0);
+  transform: translate(0);
 }
 
 .option__panelOption,
