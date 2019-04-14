@@ -64,9 +64,12 @@
 
 /* Capturing state */
 
-.capture-btn--capturing {
+.capture-btn--capturing,
+.capture-btn--capturing:visited,
+.capture-btn--capturing:active {
   position: relative;
   background: linear-gradient(135deg, #212045 0%, #3633a0 100%);
+  cursor: not-allowed;
 }
 
 .capture-btn--capturing::after {
@@ -103,7 +106,6 @@
   display: block;
   padding: 1rem;
   border: none;
-  border-radius: 0;
   border-radius: .2rem;
   background-color: transparent;
   color: #fff;
