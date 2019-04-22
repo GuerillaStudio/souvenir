@@ -5,10 +5,10 @@
       <option v-for="time in duration.list" :key="time" :value="time">
         {{ timeLabel(time) }}
       </option>
-      <button class="options__btn" :class="{ 'options__btn--check': boomerang }" title="Boomerang mode" @click="openBoomerang">
-        <icon-boomerang></icon-boomerang>
-      </button>
     </select>
+    <button class="options__btn" :class="{ 'options__btn--check': boomerang }" title="Boomerang mode" @click="openBoomerang">
+      <icon-boomerang></icon-boomerang>
+    </button>
     <div v-if="!disabledBoomerang" class="options__panel" :class="{ 'active': boomerangOpen }">
       <button class="option__panelOption" :class="{ 'current': !boomerang }" @click="updateBoomerang(false)"><icon-disabled></icon-disabled>Linear</button>
       <button class="option__panelOption" :class="{ 'current': boomerang }" @click="updateBoomerang(true)"><icon-boomerang></icon-boomerang>Boomerang</button>
