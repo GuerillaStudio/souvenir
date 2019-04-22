@@ -59,11 +59,29 @@
   height: 1.5rem;
   background: url("/assets/img/boomerang-check.svg");
   content: "";
-  animation: btnCheckArrive .5s cubic-bezier(.18,.89,.32,1.28);
+  animation: btnOptionArrive .5s cubic-bezier(.18,.89,.32,1.28);
   animation-delay: 100ms;
 }
 
-@keyframes btnCheckArrive {
+.options__btn--timer {
+  position: relative;
+}
+
+.options__btn--timer::after {
+  position: absolute;
+  right: 1.8rem;
+  bottom: 1.6rem;
+  color: #fff;
+  content: attr(data-timer);
+  text-align: right;
+  text-shadow: .2rem 0 0 var(--color-tertiary), -.2rem 0 0 var(--color-tertiary), 0 .2rem 0 var(--color-tertiary), 0 -.2rem 0 var(--color-tertiary), 1px 1px var(--color-tertiary), -1px -1px 0 var(--color-tertiary), 1px -1px 0 var(--color-tertiary), -1px 1px 0 var(--color-tertiary);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: normal;
+  animation: btnOptionArrive .5s cubic-bezier(.18,.89,.32,1.28);
+}
+
+@keyframes btnOptionArrive {
   0% {
     transform: scale(1);
   }
@@ -74,7 +92,6 @@
     transform: scale(1);
   }
 }
-
 /* Panel
 -------------------------------------------------------------- */
 
@@ -111,6 +128,10 @@
   color: #fff;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.option__panelOption--big {
+  font-size: 1.6rem;
 }
 
 .option__panelOption.current {

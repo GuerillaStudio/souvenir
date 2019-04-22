@@ -6,12 +6,20 @@
         {{ timeLabel(time) }}
       </option>
     </select>
-    <button class="options__btn" :class="{ 'options__btn--check': boomerang }" title="Boomerang mode" @click="openBoomerang">
+    <button v-if="!disabledTimer" class="options__btn" :class="{ 'options__btn--timer': timer }" :data-timer="timer" title="Timer settings" @click="openTimer">
+      <icon-timer></icon-timer>
+    </button>
+    <button v-if="!disabledBoomerang" class="options__btn" :class="{ 'options__btn--check': boomerang }" title="Boomerang mode" @click="openBoomerang">
       <icon-boomerang></icon-boomerang>
     </button>
     <div v-if="!disabledBoomerang" class="options__panel" :class="{ 'active': boomerangOpen }">
       <button class="option__panelOption" :class="{ 'current': !boomerang }" @click="updateBoomerang(false)"><icon-disabled></icon-disabled>Linear</button>
       <button class="option__panelOption" :class="{ 'current': boomerang }" @click="updateBoomerang(true)"><icon-boomerang></icon-boomerang>Boomerang</button>
+    </div>
+    <div v-if="!disabledTimer" class="options__panel" :class="{ 'active': timerOpen }">
+      <button class="option__panelOption option__panelOption--big" :class="{ 'current': timer === 0 }" @click="updateTimer(0)">0s</button>
+      <button class="option__panelOption option__panelOption--big" :class="{ 'current': timer === 3 }" @click="updateTimer(3)">3s</button>
+      <button class="option__panelOption option__panelOption--big" :class="{ 'current': timer === 10 }" @click="updateTimer(10)">10s</button>
     </div>
   </div>
 </template>
@@ -20,17 +28,20 @@
 import { mapState } from 'vuex'
 
 import iconBoomerang from '/views/icons/ico-boomerang'
+import iconTimer from '/views/icons/ico-timer'
 import iconDisabled from '/views/icons/ico-disabled'
 
 export default {
   name: 'captureOptions',
   components: {
     iconBoomerang,
+    iconTimer,
     iconDisabled
   },
   data () {
     return {
-      boomerangOpen: false
+      boomerangOpen: false,
+      timerOpen: false
     }
   },
   props: {
@@ -45,12 +56,17 @@ export default {
     disabledBoomerang: {
       type: Boolean,
       default: false
+    },
+    disabledTimer: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     ...mapState([
       'duration',
-      'boomerang'
+      'boomerang',
+      'timer'
     ]),
     selectedTime: {
       get: function () { return this.duration.selected },
@@ -73,7 +89,18 @@ export default {
     updateBoomerang (value) {
       this.$store.commit('updateBoomerang', value)
       this.closeBoomerang()
+    },
+    openTimer () {
+      this.timerOpen = true
+    },
+    closeTimer () {
+      this.timerOpen = false
+    },
+    updateTimer (value) {
+      this.$store.commit('updateTimer', value)
+      this.closeTimer()
     }
+
   }
 }
 </script>

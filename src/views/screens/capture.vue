@@ -36,7 +36,9 @@ export default {
   },
   data: () => ({
     capturing: false,
-    capturingProgress: 0
+    capturingProgress: 0,
+    countdown: false,
+    countdownProgress: 0
   }),
   computed: {
     ...mapState([

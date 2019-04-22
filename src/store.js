@@ -14,6 +14,7 @@ export default new Vuex.Store({
       list: [2, 3, 5]
     },
     boomerang: false,
+    timer: 0,
     camera: null,
     capture: null,
     gif: null,
@@ -28,6 +29,10 @@ export default new Vuex.Store({
     },
     updateBoomerang (state, value) {
       state.boomerang = value
+    },
+    updateTimer (state, value) {
+      console.log(typeof value)
+      state.timer = value
     },
     updateCamera (state, camera) {
       if (state.camera) {
