@@ -36,7 +36,7 @@ class Countdown extends EventEmitter {
   }
 
   cancel () {
-    if (this.running && !this._ended) {
+    if (this._running && !this._ended) {
       this._cleanup()
 
       this._cancelled = true

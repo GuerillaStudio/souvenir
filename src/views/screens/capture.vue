@@ -104,7 +104,7 @@ export default {
         this.countdown = null
       })
 
-      this.countdown.on('done', () => {
+      this.countdown.on('cancelled', () => {
         console.log('cancelled')
       })
 
