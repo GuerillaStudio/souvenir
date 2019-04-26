@@ -16,7 +16,7 @@
         <button class="capture-switch" title="Switch camera" @click="switchCamera"><icon-switch></icon-switch></button>
       </template>
       <template v-else>
-        <button class="btn btn--danger w100">Cancel countdown</button>
+        <button class="btn btn--danger w100" @click="cancelCountdown">Cancel countdown</button>
       </template>
     </div>
 
@@ -28,6 +28,7 @@ import captureOptions from '/views/components/capture-options'
 import captureProgress from '/views/components/capture-progress'
 import captureTimer from '/views/components/capture-timer'
 import { capture } from '/services/capture.js'
+import { countdown } from '/services/countdown.js'
 
 import 'objectFitPolyfill'
 
@@ -47,7 +48,8 @@ export default {
     capturing: false,
     capturingProgress: 0,
     timerActive: false,
-    timerProgress: 5
+    timerProgress: 5,
+    countdown: null
   }),
   computed: {
     ...mapState([
@@ -79,6 +81,45 @@ export default {
       this.$store.dispatch('requestCamera', true)
     },
     startCapturing () {
+      if (this.timer > 0) {
+        this.runCountdown()
+      } else {
+        this.runCapture()
+      }
+    },
+    runCountdown () {
+      this.countdown = countdown(this.timer, 1000)
+
+      this.countdown.on('started', value => {
+        this.timerActive = true
+      })
+
+      this.countdown.on('update', value => {
+        this.timerProgress = value
+      })
+
+      this.countdown.on('ended', () => {
+        this.timerActive = false
+        this.timerProgress = 0
+        this.countdown = null
+      })
+
+      this.countdown.on('done', () => {
+        console.log('cancelled')
+      })
+
+      this.countdown.on('done', () => {
+        this.runCapture()
+      })
+
+      this.countdown.run()
+    },
+    cancelCountdown () {
+      if (this.countdown) {
+        this.countdown.cancel()
+      }
+    },
+    runCapture () {
       this.capturing = true
       const capturing = capture(this.camera, this.duration.selected * 1000)
 
