@@ -104,10 +104,6 @@ export default {
         this.countdown = null
       })
 
-      this.countdown.on('cancelled', () => {
-        console.log('cancelled')
-      })
-
       this.countdown.on('done', () => {
         this.runCapture()
       })

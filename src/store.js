@@ -31,7 +31,6 @@ export default new Vuex.Store({
       state.boomerang = value
     },
     updateTimer (state, value) {
-      console.log(typeof value)
       state.timer = value
     },
     updateCamera (state, camera) {

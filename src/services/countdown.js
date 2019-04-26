@@ -25,48 +25,41 @@ class Countdown extends EventEmitter {
     if (!this._running && !this._started) {
       this._running = true
       this._started = true
-
       this.emit('started')
+      this._update()
 
-      this.emit('progress', 0)
-      this.emit('update', this._n)
+      this._intervalId = setInterval(() => {
+        this._count++
+        this._update()
 
-      this._intervalId = setInterval(() => this._update(), this._delay)
+        if (this._count >= this._n) {
+          this._cleanup()
+          this.done = true
+          this.emit('done')
+          this._end()
+        }
+      }, this._delay)
     }
   }
 
   cancel () {
     if (this._running && !this._ended) {
       this._cleanup()
-
       this._cancelled = true
       this.emit('cancelled')
-
-      this.ended = true
-      this.emit('ended')
-
-      this.running = false
+      this._end()
     }
   }
 
   _update () {
-    if (this._running) {
-      if (this._count < this._n) {
-        this._count++
-        this.emit('progress', this._count / this._n)
-        this.emit('update', this._n - this._count)
-      } else {
-        this._cleanup()
+    this.emit('progress', this._count / this._n)
+    this.emit('update', this._n - this._count)
+  }
 
-        this.done = true
-        this.emit('done')
-
-        this.ended = true
-        this.emit('ended')
-
-        this.running = false
-      }
-    }
+  _end () {
+    this.ended = true
+    this.emit('ended')
+    this._running = false
   }
 
   _cleanup () {
