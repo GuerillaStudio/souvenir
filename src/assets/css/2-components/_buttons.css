@@ -56,6 +56,19 @@
   background: var(--btn-primary);
 }
 
+.btn--danger,
+.btn--danger:link,
+.btn--danger:visited {
+  background: linear-gradient(116.15deg, #dd2828 0%, #a72020 100%);
+  font-weight: bold;
+}
+
+.btn--danger:hover,
+.btn--danger:active,
+.btn--danger:focus {
+  background: linear-gradient(116.15deg, #dd2828 0%, #a72020 100%);
+}
+
 /* Loading state
 -------------------------------------------------------------- */
 

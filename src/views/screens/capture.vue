@@ -7,18 +7,26 @@
 
     <div class="preview">
       <video ref="preview" class="preview-visual" :class="{ 'preview--flip': shouldFlip }" preload="yes" autoplay muted playsinline webkit-playsinline></video>
+      <capture-timer v-if="timerActive" :time="timerProgress"></capture-timer>
     </div>
 
     <div class="capture-actions">
-      <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
-      <button class="capture-switch" title="Switch camera" @click="switchCamera"><icon-switch></icon-switch></button>
+      <template v-if="!timerActive">
+        <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
+        <button class="capture-switch" title="Switch camera" @click="switchCamera"><icon-switch></icon-switch></button>
+      </template>
+      <template v-else>
+        <button class="btn btn--danger w100">Cancel countdown</button>
+      </template>
     </div>
+
   </div>
 </template>
 
 <script>
 import captureOptions from '/views/components/capture-options'
 import captureProgress from '/views/components/capture-progress'
+import captureTimer from '/views/components/capture-timer'
 import { capture } from '/services/capture.js'
 
 import 'objectFitPolyfill'
@@ -32,19 +40,21 @@ export default {
   components: {
     captureOptions,
     captureProgress,
+    captureTimer,
     iconSwitch
   },
   data: () => ({
     capturing: false,
     capturingProgress: 0,
-    countdown: false,
-    countdownProgress: 0
+    timerActive: false,
+    timerProgress: 5
   }),
   computed: {
     ...mapState([
       'camera',
       'duration',
-      'capture'
+      'capture',
+      'timer'
     ]),
     shouldFlip () {
       if (this.camera) {
