@@ -140,4 +140,25 @@
   text-shadow: 0 0 1rem var(--color-tertiary);
   font-weight: bold;
   font-size: 10rem;
+  transform-origin: center center;
+  animation: 1s ease-in infinite forwards counterFlash;
+}
+
+@keyframes counterFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  97% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
 }
