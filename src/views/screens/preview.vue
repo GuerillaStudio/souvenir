@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="download">
-    <capture-options :disabled-time="true" :disabledTimer="true" :back-btn="back"></capture-options>
+    <capture-options :disabled-time="true" :disabled-timer="true" :back-btn="back"></capture-options>
 
     <div class="preview">
       <canvas ref="previewCanvas" class="preview-visual"></canvas>
