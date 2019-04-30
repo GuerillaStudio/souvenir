@@ -39,7 +39,7 @@ export default {
       return this.value * 100
     },
     roundedPercentage () {
-      return Math.round(this.percentage)
+      return Math.trunc(this.percentage)
     }
   }
 }
