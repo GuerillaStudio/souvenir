@@ -38,12 +38,10 @@ export default {
     iconTimer,
     iconDisabled
   },
-  data () {
-    return {
-      boomerangOpen: false,
-      timerOpen: false
-    }
-  },
+  data: () => ({
+    boomerangOpen: false,
+    timerOpen: false
+  }),
   props: {
     backBtn: {
       type: Function,
