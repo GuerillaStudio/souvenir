@@ -7,10 +7,39 @@
   flex-direction: column;
   flex-grow: 1;
   max-width: 100%;
+  text-align: center;
 }
+
+/* Preview
+-------------------------------------------------------------- */
+
+.download-preview {
+  position: relative;
+  align-self: center;
+}
+
+.download-preview__visual {
+  width: 16.2rem;
+  border-radius: 42rem;
+}
+
+.download-preview__flower {
+  position: absolute;
+  right: -.6rem;
+  bottom: .2rem;
+  width: 7.1rem;
+  height: 7.9rem;
+}
+/* Button
+-------------------------------------------------------------- */
 
 .download-btn,
 .download-btn:visited {
-  margin-top: auto;
-  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-btn svg {
+  margin-right: .6rem;
 }

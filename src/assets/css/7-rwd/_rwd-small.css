@@ -7,6 +7,23 @@
     flex-grow: inherit;
   }
 
+  /* Overlay layout
+  -------------------------------------------------------------- */
+
+  .layoutOverlay-body {
+    background: var(--color-tertiary);
+  }
+
+  .layoutOverlay-close {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .layoutOverlay-close svg {
+    width: 8rem;
+    height: 8rem;
+  }
+
   /* Welcome screen
   -------------------------------------------------------------- */
 
@@ -34,5 +51,12 @@
   .capture-btn,
   .capture-btn:visited {
     margin-top: 0;
+  }
+
+  /* Encoding screen
+  -------------------------------------------------------------- */
+
+  .encoding-notif {
+    margin-top: 7rem;
   }
 }

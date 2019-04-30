@@ -3,72 +3,84 @@
 /* ----------------------------------------------------------- */
 
 .encoding {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .9);
-  color: #fff;
+  flex-grow: 1;
+  padding-bottom: 4rem;
   text-align: center;
-  font-size: 2.4rem;
 }
 
-.encoding-illu {
+/* Loader
+-------------------------------------------------------------- */
+
+.encoding-loader {
   position: relative;
-  margin-bottom: 5rem;
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+  line-height: 1;
 }
 
-.encoding-illu::before {
+.encoding-loader__preview {
   position: absolute;
-  top: .5rem;
-  right: -1rem;
-  left: -1rem;
-  height: .5rem;
-  border-radius: .5rem;
-  border-radius: .4rem;
-  background: var(--color-primary);
-  box-shadow: 0 .4rem .4rem rgba(0, 0, 0, .25);
-  content: "";
-  animation: encodingProgress .3s ease-in-out infinite alternate;
-}
-
-@keyframes encodingProgress {
-  from {
-    top: .5rem;
-  }
-
-  to {
-    top: calc(100% - 1rem);
-  }
-}
-
-.encoding-label {
-  font-size: 2rem;
-}
-
-.encoding-progressBar {
+  top: 1.4rem;
+  left: 1.4rem;
   overflow: hidden;
-  margin: 2rem 0;
-  max-width: 30rem;
-  width: 90%;
-  border-radius: .5rem;
-  background-color: rgba(255, 255, 255, .2);
+  width: 11.4rem;
+  height: 11.4rem;
+  border-radius: 100%;
+
+  object-fit: cover;
 }
 
-.encoding-progressBar__state {
-  height: .5rem;
-  background: linear-gradient(91.78deg, var(--color-primary) 0%,var(--color-secondary) 100%);
-  transition: .3s all ease-in-out;
+/* Progress bar
+-------------------------------------------------------------- */
+
+.encoding-progress__value {
+  transition: stroke-dashoffset .2s ease-in-out;
+
+  will-change: auto;
+  stroke-miterlimit: round;
 }
 
 .encoding-percent {
   padding-bottom: 2rem;
   font-size: 5rem;
   line-height: 1;
+}
+
+/* Percent
+-------------------------------------------------------------- */
+
+.encoding-percent {
+  color: rgba(255, 255, 255, .5);
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+}
+
+/* Notif
+-------------------------------------------------------------- */
+
+.encoding-notif,
+.encoding-notif:visited {
+  margin-top: auto;
+  padding: .5rem 2rem;
+  border: none;
+  border-radius: .3rem;
+  background-color: transparent;
+  color: #fff;
+  text-align: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.encoding-notif:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.encoding-notif
+.encoding-notif__icon {
+  margin-bottom: .7rem;
 }
