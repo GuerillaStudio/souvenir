@@ -1,26 +1,27 @@
 <template lang="html">
-  <div class="capture">
-    <div v-if="capturing" class="capture-progress">
-      <capture-progress :value="capturingProgress"></capture-progress>
-    </div>
-    <capture-options v-else></capture-options>
+  <layout-default>
+    <div class="capture">
+      <div v-if="capturing" class="capture-progress">
+        <capture-progress :value="capturingProgress"></capture-progress>
+      </div>
+      <capture-options v-else></capture-options>
 
-    <div class="preview">
-      <video ref="preview" class="preview-visual" :class="{ 'preview--flip': shouldFlip }" preload="yes" autoplay muted playsinline webkit-playsinline></video>
-      <capture-timer v-if="timerActive" :time="timerProgress"></capture-timer>
-    </div>
+      <div class="preview">
+        <video ref="preview" class="preview-visual" :class="{ 'preview--flip': shouldFlip }" preload="yes" autoplay muted playsinline webkit-playsinline></video>
+        <capture-timer v-if="timerActive" :time="timerProgress"></capture-timer>
+      </div>
 
-    <div class="capture-actions">
-      <template v-if="!timerActive">
-        <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
-        <button class="capture-switch" title="Switch camera" @click="switchCamera"><icon-switch></icon-switch></button>
-      </template>
-      <template v-else>
-        <button class="btn btn--danger w100" @click="cancelCountdown">Cancel countdown</button>
-      </template>
+      <div class="capture-actions">
+        <template v-if="!timerActive">
+          <button class="capture-btn" :class="{ 'capture-btn--capturing': capturing }" :disabled="!camera" @click.prevent="startCapturing">Capture</button>
+          <button class="capture-switch" title="Switch camera" @click="switchCamera"><icon-switch></icon-switch></button>
+        </template>
+        <template v-else>
+          <button class="btn btn--danger w100" @click="cancelCountdown">Cancel countdown</button>
+        </template>
+      </div>
     </div>
-
-  </div>
+  </layout-default>
 </template>
 
 <script>

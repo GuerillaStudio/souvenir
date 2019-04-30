@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="layout">
+  <div class="souvenir">
     <router-view></router-view>
     <refresh-banner></refresh-banner>
   </div>

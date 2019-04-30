@@ -1,16 +1,18 @@
 <template lang="html">
-  <div class="download">
-    <div class="options">
-      <span></span>
-      <button class="options__btn" @click="back">← back</button>
-    </div>
+  <layout-default>
+    <div class="download">
+      <div class="options">
+        <span></span>
+        <button class="options__btn" @click="back">← back</button>
+      </div>
 
-    <div class="preview preview--novideo">
-      <img class="preview-visualImg" :src="objectUrl" alt="">
-    </div>
+      <div class="preview preview--novideo">
+        <img class="preview-visualImg" :src="objectUrl" alt="">
+      </div>
 
-    <a class="download-btn btn btn--primary w100" :href="objectUrl" :download="`souvenir${timestamp}.gif`">Download GIF</a>
-  </div>
+      <a class="download-btn btn btn--primary w100" :href="objectUrl" :download="`souvenir${timestamp}.gif`">Download GIF</a>
+    </div>
+  </layout-default>
 </template>
 
 <script>
