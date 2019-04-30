@@ -1,3 +1,5 @@
+export const pipe = (x, fs) => fs.reduce((a, f) => f(a), x)
+
 export function * cycle (xs) {
   while (true) {
     yield * xs

@@ -6,7 +6,8 @@ import {
   IndexedColorImage
 } from 'gif-writer'
 
-import { calcProgress } from '/services/util.js'
+import { boomerang } from '/services/effects.js'
+import { pipe, calcProgress } from '/services/util.js'
 
 class OutputStream {
   constructor () {
@@ -41,9 +42,9 @@ export function write (imageWidth, imageHeight, delay, indexedColorImages, boome
 
     writer.writeLoopControlInfo(0)
 
-    const frames = boomerangEffect
-      ? [...indexedColorImages, ...indexedColorImages.slice(1, indexedColorImages.length - 1).reverse()]
-      : indexedColorImages
+    const frames = pipe(indexedColorImages, [
+      (images) => boomerangEffect ? boomerang(images) : images
+    ])
 
     frames.forEach((indexedColorImage, index, { length }) => {
       writer.writeTableBasedImageWithGraphicControl(indexedColorImage, { delayTimeInMS: delay })

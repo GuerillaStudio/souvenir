@@ -16,7 +16,8 @@
 import { encode } from '/services/encode.js'
 import encodingOverlay from '/views/components/encoding'
 import captureOptions from '/views/components/capture-options'
-import { cycle } from '/services/util.js'
+import { boomerang } from '/services/effects.js'
+import { pipe, cycle } from '/services/util.js'
 
 import { mapState } from 'vuex'
 
@@ -54,11 +55,10 @@ export default {
         canvas.height = this.capture.imageHeight
         const canvasContext = canvas.getContext('2d')
 
-        const frames = this.boomerang
-          ? [...this.capture.imageDataList, ...this.capture.imageDataList.slice(1, this.capture.imageDataList.length - 1).reverse()]
-          : this.capture.imageDataList
-
-        const imagesIterator = cycle(frames)
+        const imagesIterator = pipe(this.capture.imageDataList, [
+          (images) => this.boomerang ? boomerang(images) : images,
+          cycle
+        ])
         const delay = this.capture.delayTime
 
         this.previewInterval = setInterval(() => {
