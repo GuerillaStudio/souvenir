@@ -6,14 +6,14 @@
   overflow: hidden;
   width: 100%;
   height: 2.3rem;
-  border-radius: .3rem;
+  border-radius: 42rem;
   background: rgba(0, 0, 0, .4);
   box-shadow: inset 0 -.2rem 1rem rgba(0, 0, 0, .25);
 }
 
 .progressBar__state {
   height: 2.3rem;
-  border-radius: .3rem;
+  border-radius: 42rem;
   background: linear-gradient(91.78deg, var(--color-primary) 0%,var(--color-secondary) 100%);
   font-size: 0;
 }
