@@ -59,4 +59,16 @@
   .encoding-notif {
     margin-top: 7rem;
   }
+
+  /* Download
+  -------------------------------------------------------------- */
+
+  .download-preview__visual {
+    width: 25rem;
+  }
+
+  .download-preview__flower {
+    right: 0;
+    transform: rotate(15deg);
+  }
 }
