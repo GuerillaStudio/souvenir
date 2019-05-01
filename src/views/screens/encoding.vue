@@ -12,7 +12,7 @@
       <div class="layoutOverlay-subtitle">{{ labelSubtitle }}</div>
     </div>
 
-    <button class="encoding-notif">
+    <button v-if="showNotificationButton" class="encoding-notif" @click="noticeMeSenpai">
       <icon-notif class="encoding-notif__icon"></icon-notif>
       <div>Get notified when It’s done</div>
     </button>
@@ -36,7 +36,8 @@ export default {
   },
   data: () => ({
     lastTitleUpdate: null,
-    labelTitle: 'Encoding…'
+    labelTitle: 'Encoding…',
+    showNotificationButton: showNotificationButton()
   }),
   computed: {
     percentage () {
@@ -69,6 +70,11 @@ export default {
             break
         }
       }
+    },
+    noticeMeSenpai () {
+      Notification.requestPermission().then(() => {
+        this.showNotificationButton = showNotificationButton()
+      })
     }
   },
   watch: {
@@ -76,5 +82,11 @@ export default {
       this.updateTitle()
     }
   }
+}
+
+function showNotificationButton () {
+  return ('Notification' in window) &&
+    Notification.permission !== 'granted' &&
+    Notification.permission !== 'denied'
 }
 </script>

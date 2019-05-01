@@ -24,6 +24,7 @@ import { encode } from '/services/encode.js'
 import encodingScreen from '/views/screens/encoding'
 import iconDl from '/views/icons/ico-download'
 import illuFlower from '/views/icons/flower'
+import appLogo from '/assets/img/icons/android-chrome-512x512.png'
 
 export default {
   name: 'download',
@@ -85,6 +86,19 @@ export default {
         this.$store.commit('updateGif', gif)
         this.fillGIF()
         this.downloadReady = true
+
+        if (document.hidden && ('Notification' in window) && Notification.permission === 'granted') {
+          const notification = new Notification('You can now download your souvenir', {
+            body: 'Thank you for your patience.',
+            icon: appLogo
+          })
+
+          notification.addEventListener('click', () => {
+            parent.focus()
+          }, {
+            once: true
+          })
+        }
       })
     }
   },
