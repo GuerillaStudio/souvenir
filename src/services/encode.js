@@ -1,5 +1,12 @@
+import genericPool from 'generic-pool'
 import { calcProgress } from '/services/util.js'
-import { task, do as taskDo, waitAll } from 'folktale/concurrency/task'
+import {
+  task,
+  do as taskDo,
+  of as taskOf,
+  fromPromised as taskFromPromised,
+  waitAll
+} from 'folktale/concurrency/task'
 
 import { GIF_PALETTE_SIZE } from '/constants.js'
 
@@ -23,26 +30,56 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, {
 }
 
 function quantizeColorImageDataList (imageDataList, paletteSize, progressCallback) {
-  let complete = 0
-
-  const tasks = imageDataList
-    .map(imageData => quantizeColorImageData(imageData, paletteSize))
-    .map(task => {
-      return task.map(x => {
-        progressCallback(++complete / imageDataList.length)
-        return x
-      })
+  return task((resolver) => {
+    const workerPool = genericPool.createPool({
+      create: () => new Worker('/services/quantize-color.worker.js'),
+      destroy: worker => worker.terminate()
+    }, {
+      min: 0,
+      max: 2
     })
 
-  return waitAll(tasks)
+    resolver.cleanup(() => {
+      workerPool.drain()
+    })
+
+    let complete = 0
+
+    const acquireWorker = taskFromPromised(() => workerPool.acquire())
+    const releaseWorker = taskFromPromised((worker) => workerPool.release(worker))
+
+    const tasks = imageDataList
+      .map(imageData => taskDo(function * () {
+        const worker = yield acquireWorker()
+        const indexedColorImage = yield quantizeColorImageData(worker, imageData, paletteSize)
+        releaseWorker(worker).run()
+        return taskOf(indexedColorImage)
+      }))
+      .map(task => {
+        return task.map(x => {
+          progressCallback(++complete / imageDataList.length)
+          return x
+        })
+      })
+
+    const execution = waitAll(tasks).run()
+
+    resolver.onCancelled(() => { execution.cancel() })
+
+    execution.listen({
+      onCancelled: resolver.cancel,
+      onRejected: resolver.reject,
+      onResolved: resolver.resolve
+    })
+  })
 }
 
-function quantizeColorImageData (imageData, paletteSize) {
+function quantizeColorImageData (worker, imageData, paletteSize) {
   return task((resolver) => {
-    const worker = new Worker('/services/quantize-color.worker.js')
-
     resolver.cleanup(() => {
-      worker.terminate()
+      worker.onerror = null
+      worker.onmessageerror = null
+      worker.onmessage = null
     })
 
     worker.onerror = resolver.reject
