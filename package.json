@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.3",
     "eventemitter3": "^3.1.0",
+    "folktale": "^2.3.2",
     "generic-pool": "^3.6.1",
     "gif-writer": "^0.9.3",
     "objectFitPolyfill": "^2.1.1",

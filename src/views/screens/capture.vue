@@ -89,27 +89,28 @@ export default {
       }
     },
     runCountdown () {
-      this.countdown = countdown(this.timer, 1000)
-
-      this.countdown.on('started', value => {
-        this.timerActive = true
-      })
-
-      this.countdown.on('update', value => {
+      const step = (value) => {
         this.timerProgress = value
-      })
+      }
 
-      this.countdown.on('ended', () => {
+      const cleanup = () => {
         this.timerActive = false
         this.timerProgress = 0
         this.countdown = null
-      })
+      }
 
-      this.countdown.on('done', () => {
-        this.runCapture()
-      })
+      this.timerActive = true
+      this.timerProgress = this.timer
 
-      this.countdown.run()
+      this.countdown = countdown(this.timer, 1000, step).run()
+
+      this.countdown.listen({
+        onCancelled: cleanup,
+        onRejected: cleanup,
+        onResolved: () => {
+          this.runCapture()
+        }
+      })
     },
     cancelCountdown () {
       if (this.countdown) {
