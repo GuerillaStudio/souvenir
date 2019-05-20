@@ -3,4 +3,15 @@
 /* ----------------------------------------------------------- */
 
 @media (min-width: 480px) {
+  /* Download
+  -------------------------------------------------------------- */
+
+  .download-preview__visual {
+    width: 25rem;
+  }
+
+  .download-preview__flower {
+    right: 0;
+    transform: rotate(15deg);
+  }
 }
