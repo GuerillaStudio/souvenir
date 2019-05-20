@@ -35,6 +35,7 @@ export default {
   },
   data: () => ({
     encoding: false,
+    encodingExecution: null,
     encodingProgress: 0,
     objectUrl: null,
     downloadReady: false
@@ -54,6 +55,7 @@ export default {
   },
   methods: {
     back () {
+      this.cancelEncode()
       this.$router.push({ name: 'preview' })
     },
     backHome () {
@@ -66,47 +68,59 @@ export default {
       URL.revokeObjectURL(this.objectUrl)
       this.$store.commit('updateGif', null)
     },
-    startEncoding () {
+    startEncode () {
       this.encoding = true
-      const encoding = encode(this.capture, { boomerangEffect: this.boomerang })
+      this.encodingProgress = 0
 
-      encoding.once('error', error => {
-        console.error(error)
+      this.encodingExecution = encode(
+        this.capture,
+        { boomerangEffect: this.boomerang },
+        (value) => {
+          this.encodingProgress = value
+        }
+      ).run()
+
+      const cleanup = () => {
         this.encoding = false
         this.encodingProgress = 0
-      })
+        this.encodingExecution = null
+      }
 
-      encoding.on('progress', value => {
-        this.encodingProgress = value
-      })
+      this.encodingExecution.listen({
+        onCancelled: cleanup,
+        onRejected: cleanup,
+        onResolved: (gif) => {
+          cleanup()
+          this.$store.commit('updateGif', gif)
+          this.fillGIF()
+          this.downloadReady = true
 
-      encoding.once('done', gif => {
-        this.encoding = false
-        this.encodingProgress = 0
-        this.$store.commit('updateGif', gif)
-        this.fillGIF()
-        this.downloadReady = true
+          if (document.hidden && ('Notification' in window) && Notification.permission === 'granted') {
+            const notification = new Notification('You can now download your souvenir', {
+              body: 'Thank you for your patience.',
+              icon: appLogo
+            })
 
-        if (document.hidden && ('Notification' in window) && Notification.permission === 'granted') {
-          const notification = new Notification('You can now download your souvenir', {
-            body: 'Thank you for your patience.',
-            icon: appLogo
-          })
-
-          notification.addEventListener('click', () => {
-            parent.focus()
-          }, {
-            once: true
-          })
+            notification.addEventListener('click', () => {
+              parent.focus()
+            }, {
+              once: true
+            })
+          }
         }
       })
+    },
+    cancelEncode () {
+      if (this.encodingExecution) {
+        this.encodingExecution.cancel()
+      }
     }
   },
   created () {
     if (!this.capture) {
       this.$router.push({ name: 'home' })
     } else if (!this.gif) {
-      this.startEncoding()
+      this.startEncode()
     } else {
       this.fillGIF()
     }

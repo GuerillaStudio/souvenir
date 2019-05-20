@@ -1,76 +1,103 @@
-import EventEmitter from 'eventemitter3'
-import genericPool from 'generic-pool'
-import { promisesProgress, calcProgress } from '/services/util.js'
+import { calcProgress } from '/services/util.js'
+import { task, do as taskDo, waitAll } from 'folktale/concurrency/task'
 
 import { GIF_PALETTE_SIZE } from '/constants.js'
 
-export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, { boomerangEffect }) {
-  const emitter = new EventEmitter()
+export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, { boomerangEffect }, progressCallback) {
+  return taskDo(function * () {
+    const indexedColorImageList = yield quantizeColorImageDataList(
+      imageDataList,
+      GIF_PALETTE_SIZE,
+      (value) => progressCallback(calcProgress(0, 0.9, value))
+    )
 
-  const quantizeColorWorkerPool = genericPool.createPool({
-    create: () => new Worker('/services/quantize-color.worker.js'),
-    destroy: worker => worker.terminate()
-  }, {
-    min: 0,
-    max: 2
+    return writeBlob(
+      imageWidth,
+      imageHeight,
+      indexedColorImageList,
+      delayTime,
+      boomerangEffect,
+      (value) => progressCallback(calcProgress(0.9, 1, value))
+    )
   })
+}
 
-  const indexedColorImagesP = imageDataList
-    .map(async imageData => {
-      const worker = await quantizeColorWorkerPool.acquire()
+function quantizeColorImageDataList (imageDataList, paletteSize, progressCallback) {
+  let complete = 0
 
-      const indexedColorImage = await new Promise((resolve, reject) => {
-        worker.onerror = reject
-        worker.onmessageerror = reject
-        worker.onmessage = event => {
-          resolve(event.data)
-        }
-
-        worker.postMessage({
-          imageData,
-          paletteSize: GIF_PALETTE_SIZE
-        })
+  const tasks = imageDataList
+    .map(imageData => quantizeColorImageData(imageData, paletteSize))
+    .map(task => {
+      return task.map(x => {
+        progressCallback(++complete / imageDataList.length)
+        return x
       })
-
-      await quantizeColorWorkerPool.release(worker)
-      return indexedColorImage
     })
 
-  const progressPromises = promisesProgress(indexedColorImagesP, function (value) {
-    emitter.emit('progress', calcProgress(0, 0.9, value))
+  return waitAll(tasks)
+}
+
+function quantizeColorImageData (imageData, paletteSize) {
+  return task((resolver) => {
+    const worker = new Worker('/services/quantize-color.worker.js')
+
+    resolver.cleanup(() => {
+      worker.terminate()
+    })
+
+    worker.onerror = resolver.reject
+    worker.onmessageerror = resolver.reject
+
+    worker.onmessage = event => {
+      resolver.resolve(event.data)
+    }
+
+    worker.postMessage({
+      imageData,
+      paletteSize
+    })
   })
+}
 
-  Promise.all(progressPromises).then(indexedColorImages => {
-    const writeWorker = new Worker('/services/write-gif.worker.js')
+function writeBlob (
+  imageWidth,
+  imageHeight,
+  indexedColorImages,
+  delayTime,
+  boomerangEffect,
+  onProgress
+) {
+  return task((resolver) => {
+    const worker = new Worker('/services/write-gif.worker.js')
 
-    writeWorker.onerror = error => emitter.emit('error', error)
-    writeWorker.onmessageerror = error => emitter.emit('error', error)
+    resolver.cleanup(() => {
+      worker.terminate()
+    })
 
-    writeWorker.onmessage = event => {
+    worker.onerror = resolver.reject
+    worker.onmessageerror = resolver.reject
+
+    worker.onmessage = event => {
       const { type, payload } = event.data
 
       switch (type) {
-        default:
-          emitter.emit('error', new Error(`Unexpected worker message with type ${type}`))
-          break
-
         case 'progress':
-          emitter.emit('progress', calcProgress(0.9, 1, payload.value))
-          break
+          onProgress(payload.value)
+          return
 
         case 'done':
-          const byteArray = new Uint8Array(payload.buffer)
-          const blob = new Blob([byteArray], { type: 'image/gif' })
-
-          emitter.emit('done', {
-            blob,
+          resolver.resolve({
+            blob: new Blob([new Uint8Array(payload.buffer)], { type: 'image/gif' }),
             createdAt: new Date()
           })
-          break
+          return
+
+        default:
+          resolver.reject(new Error(`Unexpected worker message with type ${type}`))
       }
     }
 
-    writeWorker.postMessage({
+    worker.postMessage({
       imageWidth,
       imageHeight,
       indexedColorImages,
@@ -78,7 +105,4 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, {
       boomerangEffect
     })
   })
-    .catch(error => emitter.emit('error', error))
-
-  return emitter
 }
