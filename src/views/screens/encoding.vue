@@ -44,7 +44,7 @@ export default {
       return Math.trunc(this.value * 100)
     },
     labelSubtitle () {
-      return Math.random() < 0.7 ? 'Encoding may take some time depending on your device' : 'Encoding may take some time depending on your level of cuteness'
+      return Math.random() < 0.69 ? 'Encoding may take some time depending on your device' : 'Encoding may take some time depending on your level of cuteness'
     }
   },
   methods: {
