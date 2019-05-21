@@ -119,23 +119,28 @@ export default {
     },
     runCapture () {
       this.capturing = true
-      const capturing = capture(this.camera, this.duration.selected * 1000)
 
-      capturing.once('error', error => {
-        console.error(error)
+      const captureExecution = capture(
+        this.camera,
+        this.duration.selected * 1000,
+        value => {
+          this.capturingProgress = value
+        }
+      ).run()
+
+      const cleanup = () => {
         this.capturing = false
         this.capturingProgress = 0
-      })
+      }
 
-      capturing.on('progress', value => {
-        this.capturingProgress = value
-      })
-
-      capturing.once('done', captureData => {
-        this.capturing = false
-        this.capturingProgress = 0
-        this.$store.commit('updateCapture', captureData)
-        this.$router.push({ name: 'preview' })
+      captureExecution.listen({
+        onCancelled: cleanup,
+        onRejected: cleanup,
+        onResolved: (captureData) => {
+          cleanup()
+          this.$store.commit('updateCapture', captureData)
+          this.$router.push({ name: 'preview' })
+        }
       })
     },
     async ensureCamera () {
