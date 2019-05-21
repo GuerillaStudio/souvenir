@@ -1,11 +1,7 @@
-import { convertImageDataToIndexedColorImage } from '/services/encode-core.js'
+import { convertImageDataToIndexedColorImage } from '/services/quantize-color.js'
 
-onmessage = handleMessage
-
-function handleMessage (event) {
+onmessage = event => {
   const { imageData, paletteSize } = event.data
 
-  const indexedColorImage = convertImageDataToIndexedColorImage(imageData, paletteSize)
-
-  postMessage(indexedColorImage)
+  postMessage(convertImageDataToIndexedColorImage(imageData, paletteSize))
 }

@@ -1,23 +1,19 @@
-import { write } from '/services/encode-core.js'
+import { write } from '/services/write-gif.js'
 
-onmessage = handleMessage
+const postProgressMessage = value => postMessage({ type: 'progress', payload: { value } })
+const postDoneMessage = buffer => postMessage({ type: 'done', payload: { buffer } })
 
-async function handleMessage (event) {
+onmessage = event => {
   const { imageWidth, imageHeight, delayTime, indexedColorImages, boomerangEffect } = event.data
 
-  const writing = write(imageWidth, imageHeight, delayTime, indexedColorImages, boomerangEffect)
+  const buffer = write(
+    imageWidth,
+    imageHeight,
+    delayTime,
+    indexedColorImages,
+    boomerangEffect,
+    postProgressMessage
+  )
 
-  writing.on('progress', value => postMessage({
-    type: 'progress',
-    payload: {
-      value
-    }
-  }))
-
-  writing.once('done', buffer => postMessage({
-    type: 'done',
-    payload: {
-      buffer
-    }
-  }))
+  postDoneMessage(buffer)
 }
