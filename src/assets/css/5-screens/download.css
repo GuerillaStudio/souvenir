@@ -21,6 +21,18 @@
   max-width: 100%;
   width: 16.2rem;
   border-radius: 42rem;
+  animation: previewEnterWave cubic-bezier(.18,.89,0,1.57) .4s forwards;
+
+  will-change: transform;
+}
+
+@keyframes previewEnterWave {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .download-preview__flower {
@@ -30,6 +42,24 @@
   width: 7.1rem;
   height: 7.9rem;
 }
+
+.download-preview__flower * {
+  transform: scale3d(0, 0, 0);
+  transform-origin: bottom left;
+  animation: previewEnterFlower .7s cubic-bezier(0,.76,.32,1) .4s forwards;
+
+  will-change: transform;
+}
+
+@keyframes previewEnterFlower {
+  from {
+    transform: scale3d(0, 0, 0) rotate(50deg);
+  }
+  to {
+    transform: scale3d(1, 1, 1) rotate(0deg);
+  }
+}
+
 
 /* Button
 -------------------------------------------------------------- */
