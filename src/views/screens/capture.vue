@@ -108,6 +108,7 @@ export default {
         onCancelled: cleanup,
         onRejected: cleanup,
         onResolved: () => {
+          cleanup()
           this.runCapture()
         }
       })
