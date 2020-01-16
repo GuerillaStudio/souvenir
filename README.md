@@ -6,7 +6,7 @@ Capture few seconds as a gif for souvenir
 ```
 npm i
 ```
-of if you don't want to impact the package-lock
+or if you don't want to impact the package-lock
 ```
 npm ci
 ```
