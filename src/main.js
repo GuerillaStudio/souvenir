@@ -19,3 +19,14 @@ new Vue({
 }).$mount('#app')
 
 registerServiceWorker()
+
+console.log(`%c
+  ┌─┐┌─┐┬ ┬┬  ┬┌─┐┌┐┌┬┬─┐
+  └─┐│ ││ │└┐┌┘├┤ ││││├┬┘
+  └─┘└─┘└─┘ └┘ └─┘┘└┘┴┴└─
+
+  Oh hi! If you're looking for the source code, It's here: https://github.com/GlitchFamily/souvenir
+
+  Have fun 💜
+
+`, 'font-family:monospace')
