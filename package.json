@@ -34,7 +34,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^5.2.3",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-static-files-copy": "^2.2.1",
+    "parcel-plugin-static-files-copy": "^2.4.3",
     "parcel-plugin-sw-precache": "^1.1.1",
     "vue-hot-reload-api": "^2.3.4",
     "vue-template-compiler": "^2.6.10"
