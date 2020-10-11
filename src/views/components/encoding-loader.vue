@@ -26,7 +26,7 @@ export default {
   computed: {
     pathDashOffset () {
       if (this.percent) {
-        let to = this.progressPerimeter * ((100 - this.percent) / 100)
+        const to = this.progressPerimeter * ((100 - this.percent) / 100)
         return Math.max(0, to) // Prevent negative number
       }
       return this.progressPerimeter

@@ -10,7 +10,7 @@ export async function getCamera (shouldFaceUser) {
     preferredFacingMode
   ].map(facingModeConstraint => ({ video: { facingMode: facingModeConstraint } }))
 
-  for (let constraints of constraintsList) {
+  for (const constraints of constraintsList) {
     try {
       console.log(constraints)
       return {

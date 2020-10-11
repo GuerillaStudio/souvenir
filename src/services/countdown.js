@@ -4,7 +4,7 @@ export function countdown (n, delay, onStep) {
   return task(resolver => {
     let count = 0
 
-    let intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       count++
       onStep(n - count)
 

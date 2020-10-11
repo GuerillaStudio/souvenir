@@ -7,7 +7,7 @@ import {
   GIF_FRAME_RATE
 } from '/constants.js'
 
-export function capture({ mediaStream, facingMode }, duration, progressCallback) {
+export function capture ({ mediaStream, facingMode }, duration, progressCallback) {
   const delayTime = 1000 / GIF_FRAME_RATE
   const totalFrames = duration / 1000 * GIF_FRAME_RATE
 
@@ -35,7 +35,7 @@ export function capture({ mediaStream, facingMode }, duration, progressCallback)
       video.removeEventListener('canplaythrough', afterVideoAvailable)
     })
 
-    function afterVideoAvailable() {
+    function afterVideoAvailable () {
       const canvas = document.createElement('canvas')
       canvas.width = GIF_WIDTH
       canvas.height = GIF_HEIGHT
@@ -50,7 +50,6 @@ export function capture({ mediaStream, facingMode }, duration, progressCallback)
       const imageDataList = []
       const destinationRectangle = makeRectangle(0, 0, canvas.width, canvas.height)
       const soureRectangle = crop(makeRectangle(0, 0, video.videoWidth, video.videoHeight))
-
 
       captureFrame()
 
