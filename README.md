@@ -2,6 +2,8 @@
 
 Capture few seconds as a gif for souvenir
 
+![UI Showcase](showcase.png)
+
 ## Project setup
 ```
 npm i
