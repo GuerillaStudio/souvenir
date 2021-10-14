@@ -64,7 +64,7 @@ export default {
   mounted () {
     this.startPreview()
   },
-  destroyed () {
+  unmounted () {
     this.stopPreview()
   }
 }

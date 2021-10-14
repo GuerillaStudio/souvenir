@@ -23,7 +23,7 @@ export default {
   mounted: function () {
     document.body.classList.add('layoutOverlay-body')
   },
-  destroyed: function () {
+  unmounted: function () {
     document.body.classList.remove('layoutOverlay-body')
   }
 }

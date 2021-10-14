@@ -178,7 +178,7 @@ export default {
 
     this.ensureCamera()
   },
-  destroyed: function () {
+  unmounted: function () {
     document.body.classList.remove('capture-body')
     document.removeEventListener('visibilitychange', this.handleVisibilityChange)
   }

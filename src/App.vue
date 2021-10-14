@@ -23,7 +23,7 @@ export default {
   mounted () {
     document.addEventListener('visibilitychange', this.handleVisibilityChange)
   },
-  destroyed () {
+  unmounted () {
     document.removeEventListener('visibilitychange', this.handleVisibilityChange)
   }
 }

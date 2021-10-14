@@ -125,7 +125,7 @@ export default {
       this.fillGIF()
     }
   },
-  destroyed () {
+  unmounted () {
     this.emptyGIF()
   }
 }

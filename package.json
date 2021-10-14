@@ -11,7 +11,6 @@
     "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
-    "@vue/compat": "^3.2.20",
     "folktale": "^2.3.2",
     "generic-pool": "^3.7.1",
     "gif-writer": "^0.9.3",
