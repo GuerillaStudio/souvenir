@@ -25,17 +25,17 @@
 </template>
 
 <script>
-import captureOptions from '/views/components/capture-options'
-import captureProgress from '/views/components/capture-progress'
-import captureTimer from '/views/components/capture-timer'
-import { capture } from '/services/capture.js'
-import { countdown } from '/services/countdown.js'
+import captureOptions from '~/src/views/components/capture-options.vue'
+import captureProgress from '~/src/views/components/capture-progress.vue'
+import captureTimer from '~/src/views/components/capture-timer.vue'
+import { capture } from '~/src/services/capture.js'
+import { countdown } from '~/src/services/countdown.js'
 
 import 'objectFitPolyfill'
 
 import { mapState } from 'vuex'
 
-import iconSwitch from '/views/icons/ico-switch'
+import iconSwitch from '~/src/views/icons/ico-switch.vue'
 
 export default {
   name: 'capture',
@@ -62,15 +62,15 @@ export default {
     shouldFlip () {
       if (this.camera) {
         switch (this.camera.facingMode) {
-          default:
-            throw new Error('Unhandled case')
-
           case 'user':
           case 'unknow':
             return true
 
           case 'environment':
             return false
+
+          default:
+            throw new Error('Unhandled case')
         }
       } else {
         return false

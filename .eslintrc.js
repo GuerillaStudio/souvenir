@@ -1,23 +1,20 @@
 module.exports = {
-  'env': {
-    'es6': true,
-    'node': true
+  env: {
+    es6: true,
+    node: true
   },
-  'extends': [
+  extends: [
     'standard',
     'plugin:vue/essential'
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly'
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
-  'parserOptions': {
-    'ecmaVersion': 2018,
-  },
-  'plugins': [
+  plugins: [
     'vue'
   ],
-  'rules': {
+  rules: {
     'no-console': 'off',
     'no-debugger': 'off',
     'vue/html-end-tags': 'error',

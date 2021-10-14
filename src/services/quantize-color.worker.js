@@ -1,4 +1,4 @@
-import { convertImageDataToIndexedColorImage } from '/services/quantize-color.js'
+import { convertImageDataToIndexedColorImage } from '~/src/services/quantize-color.js'
 
 onmessage = event => {
   const { imageData, paletteSize } = event.data

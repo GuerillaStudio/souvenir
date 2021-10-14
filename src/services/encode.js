@@ -1,5 +1,5 @@
 import genericPool from 'generic-pool'
-import { calcProgress } from '/services/util.js'
+import { calcProgress } from '~/src/services/util.js'
 import {
   task,
   do as taskDo,
@@ -8,7 +8,7 @@ import {
   waitAll
 } from 'folktale/concurrency/task'
 
-import { GIF_PALETTE_SIZE } from '/constants.js'
+import { GIF_PALETTE_SIZE } from '~/src/constants.js'
 
 export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, { boomerangEffect }, progressCallback) {
   return taskDo(function * () {
@@ -32,7 +32,7 @@ export function encode ({ imageDataList, imageWidth, imageHeight, delayTime }, {
 function quantizeColorImageDataList (imageDataList, paletteSize, progressCallback) {
   return task((resolver) => {
     const workerPool = genericPool.createPool({
-      create: () => new Worker('/services/quantize-color.worker.js'),
+      create: () => new Worker(new URL('~/src/services/quantize-color.worker.js', import.meta.url), { type: 'module' }),
       destroy: worker => worker.terminate()
     }, {
       min: 0,
@@ -105,7 +105,7 @@ function writeBlob (
   onProgress
 ) {
   return task((resolver) => {
-    const worker = new Worker('/services/write-gif.worker.js')
+    const worker = new Worker(new URL('~/src/services/write-gif.worker.js', import.meta.url), { type: 'module' })
 
     resolver.cleanup(() => {
       worker.terminate()

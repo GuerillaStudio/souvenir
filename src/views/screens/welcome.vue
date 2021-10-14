@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import illuWelcome from '/views/components/illu-welcome'
+import illuWelcome from '~/src/views/components/illu-welcome.vue'
 
 export default {
   name: 'welcome',

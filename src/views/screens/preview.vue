@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import captureOptions from '/views/components/capture-options'
-import previewCanvas from '/views/components/preview-canvas'
+import captureOptions from '~/src/views/components/capture-options.vue'
+import previewCanvas from '~/src/views/components/preview-canvas.vue'
 
 import { mapState } from 'vuex'
 

@@ -11,39 +11,35 @@
     "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
-    "@babel/runtime": "^7.6.3",
+    "@vue/compat": "^3.2.20",
     "folktale": "^2.3.2",
     "generic-pool": "^3.7.1",
     "gif-writer": "^0.9.3",
     "objectFitPolyfill": "^2.3.0",
+    "parcel": "^2.0.0",
     "postcss-modules": "^1.4.1",
-    "vue": "^2.6.10",
-    "vue-router": "^3.1.3",
-    "vuex": "^3.1.1"
+    "vue": "^3.2.20",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@vue/component-compiler-utils": "^3.0.0",
+    "@parcel/packager-raw-url": "^2.0.0",
+    "@parcel/transformer-vue": "^2.0.0",
+    "@parcel/transformer-webmanifest": "^2.0.0",
+    "@vue/compiler-sfc": "^3.2.20",
     "autoprefixer": "^9.7.0",
-    "eslint": "^6.5.1",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^5.2.3",
-    "parcel-bundler": "^1.12.4",
+    "eslint": "^8.0.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-vue": "^7.19.1",
     "parcel-plugin-static-files-copy": "^2.4.3",
-    "parcel-plugin-sw-precache": "^1.1.1",
     "vue-hot-reload-api": "^2.3.4",
     "vue-template-compiler": "^2.6.10"
   },
   "staticFiles": {
     "staticPath": "public",
     "watcherGlob": "**"
-  },
-  "sw-precache": {
-    "maximumFileSizeToCacheInBytes": 10485760
   }
 }

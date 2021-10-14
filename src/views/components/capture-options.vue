@@ -27,9 +27,9 @@
 <script>
 import { mapState } from 'vuex'
 
-import iconBoomerang from '/views/icons/ico-boomerang'
-import iconTimer from '/views/icons/ico-timer'
-import iconDisabled from '/views/icons/ico-disabled'
+import iconBoomerang from '~/src/views/icons/ico-boomerang.vue'
+import iconTimer from '~/src/views/icons/ico-timer.vue'
+import iconDisabled from '~/src/views/icons/ico-disabled.vue'
 
 export default {
   name: 'captureOptions',

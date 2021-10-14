@@ -1,4 +1,4 @@
-import { write } from '/services/write-gif.js'
+import { write } from '~/src/services/write-gif.js'
 
 const postProgressMessage = value => postMessage({ type: 'progress', payload: { value } })
 const postDoneMessage = buffer => postMessage({ type: 'done', payload: { buffer } })

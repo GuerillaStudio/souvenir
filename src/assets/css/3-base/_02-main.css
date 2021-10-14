@@ -11,7 +11,7 @@ body {
   flex-direction: column;
   justify-content: center;
   min-height: 100%;
-  background: var(--color-tertiary) url("/assets/img/dotgrid.png");
+  background: var(--color-tertiary) url("~/src/assets/img/dotgrid.png");
   color: var(--color-light-text);
   font-family: var(--fontstack);
 

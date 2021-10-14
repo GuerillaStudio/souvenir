@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import encodingLoader from '/views/components/encoding-loader'
-import previewCanvas from '/views/components/preview-canvas'
-import iconNotif from '/views/icons/ico-notif'
+import encodingLoader from '~/src/views/components/encoding-loader.vue'
+import previewCanvas from '~/src/views/components/preview-canvas.vue'
+import iconNotif from '~/src/views/icons/ico-notif.vue'
 
 export default {
   name: 'encoding',

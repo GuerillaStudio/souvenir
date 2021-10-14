@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import IconClose from '/views/icons/ico-close'
+import IconClose from '~/src/views/icons/ico-close.vue'
 
 import { mapState } from 'vuex'
 

@@ -38,7 +38,7 @@
 
 .options__select {
   padding-right: 4.4rem;
-  background: url("/assets/img/ico-arrow.svg") no-repeat;
+  background: url("~/src/assets/img/ico-arrow.svg") no-repeat;
   background-position: calc(100% - 2rem) center;
 }
 
@@ -57,7 +57,7 @@
   bottom: 1.5rem;
   width: 1.8rem;
   height: 1.5rem;
-  background: url("/assets/img/boomerang-check.svg");
+  background: url("~/src/assets/img/boomerang-check.svg");
   content: "";
   animation: btnOptionArrive .5s cubic-bezier(.18,.89,.32,1.28);
   animation-delay: 100ms;

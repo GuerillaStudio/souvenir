@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import RefreshBanner from '/views/components/refresh'
+import RefreshBanner from '~/src/views/components/refresh'
 
 export default {
   name: 'souvenir',
@@ -30,5 +30,5 @@ export default {
 </script>
 
 <style lang="css">
-@import '/assets/css/style.css';
+@import '~/src/assets/css/style.css';
 </style>

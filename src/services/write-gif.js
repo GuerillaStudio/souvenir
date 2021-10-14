@@ -1,6 +1,6 @@
 import { GifWriter } from 'gif-writer'
-import { boomerang } from '/services/effects.js'
-import { pipe, calcProgress } from '/services/util.js'
+import { boomerang } from '~/src/services/effects.js'
+import { pipe, calcProgress } from '~/src/services/util.js'
 
 class OutputStream {
   constructor () {

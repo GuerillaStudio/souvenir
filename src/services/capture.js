@@ -1,11 +1,11 @@
 import { task, of as taskOf } from 'folktale/concurrency/task'
-import { makeRectangle, crop } from '/services/rectangle.js'
+import { makeRectangle, crop } from '~/src/services/rectangle.js'
 
 import {
   GIF_WIDTH,
   GIF_HEIGHT,
   GIF_FRAME_RATE
-} from '/constants.js'
+} from '~/src/constants.js'
 
 export function capture ({ mediaStream, facingMode }, duration, progressCallback) {
   const delayTime = 1000 / GIF_FRAME_RATE

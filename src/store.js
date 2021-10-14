@@ -1,24 +1,22 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
+import { getCamera } from '~/src/services/camera.js'
 
-import { getCamera } from '/services/camera.js'
-
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default createStore({
   strict: process.env.NODE_ENV !== 'production',
-  state: {
-    cameraShouldFaceUser: true,
-    duration: {
-      selected: 2,
-      list: [2, 3, 5]
-    },
-    boomerang: false,
-    timer: 0,
-    camera: null,
-    capture: null,
-    gif: null,
-    needRefresh: false
+  state () {
+    return {
+      cameraShouldFaceUser: true,
+      duration: {
+        selected: 2,
+        list: [2, 3, 5]
+      },
+      boomerang: false,
+      timer: 0,
+      camera: null,
+      capture: null,
+      gif: null,
+      needRefresh: false
+    }
   },
   mutations: {
     updateCameraShouldFaceUser (state, cameraShouldFaceUser) {

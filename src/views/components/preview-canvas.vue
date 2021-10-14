@@ -4,8 +4,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { boomerang } from '/services/effects.js'
-import { pipe, cycle } from '/services/util.js'
+import { boomerang } from '~/src/services/effects.js'
+import { pipe, cycle } from '~/src/services/util.js'
 
 export default {
   name: 'previewCanvas',

@@ -20,11 +20,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import { encode } from '/services/encode.js'
-import encodingScreen from '/views/screens/encoding'
-import iconDl from '/views/icons/ico-download'
-import illuFlower from '/views/icons/flower'
-import appLogo from '/assets/img/icons/android-chrome-512x512.png'
+import { encode } from '~/src/services/encode.js'
+import encodingScreen from '~/src/views/screens/encoding.vue'
+import iconDl from '~/src/views/icons/ico-download.vue'
+import illuFlower from '~/src/views/icons/flower.vue'
+import appLogo from '~/src/assets/img/icons/android-chrome-512x512.png'
 
 export default {
   name: 'download',

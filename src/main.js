@@ -1,22 +1,19 @@
-import Vue from 'vue'
-import App from '/App.vue'
-import router from '/router'
-import store from '/store'
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-import registerServiceWorker from '/register-service-worker.js'
+import registerServiceWorker from './register-service-worker.js'
 
-import LayoutDefault from '/views/layout/default'
-import LayoutOverlay from '/views/layout/overlay'
-Vue.component('layout-default', LayoutDefault)
-Vue.component('layout-overlay', LayoutOverlay)
+import LayoutDefault from '~/src/views/layout/default.vue'
+import LayoutOverlay from '~/src/views/layout/overlay.vue'
 
-Vue.config.productionTip = false
-
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+createApp(App)
+  .use(store)
+  .use(router)
+  .component('layout-default', LayoutDefault)
+  .component('layout-overlay', LayoutOverlay)
+  .mount('#app')
 
 registerServiceWorker()
 

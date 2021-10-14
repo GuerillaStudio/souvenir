@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import iconClose from '/views/icons/ico-close-overlay'
+import iconClose from '~/src/views/icons/ico-close-overlay.vue'
 
 export default {
   components: {
