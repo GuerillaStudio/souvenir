@@ -11,6 +11,7 @@
     "lint-fix": "eslint --ext .js,vue . --fix"
   },
   "dependencies": {
+    "@parcel/service-worker": "^2.0.0",
     "folktale": "^2.3.2",
     "generic-pool": "^3.7.1",
     "gif-writer": "^0.9.3",
