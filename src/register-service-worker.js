@@ -1,7 +1,7 @@
 import store from '~/src/store'
 
 export default () => {
-  if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+  if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register(new URL('~/src/service-worker.js', import.meta.url), { type: 'module' })
       .then(registration => {

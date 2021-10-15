@@ -85,12 +85,8 @@ export default {
 }
 
 function showNotificationButton () {
-  return false
-
-  // TODO: fuuuuuuuuuuuuu android, I don't want to spawn notifications from a fucking service worker :<
-
-  // return ('Notification' in window) &&
-  //   Notification.permission !== 'granted' &&
-  //   Notification.permission !== 'denied'
+  return ('Notification' in window) &&
+    Notification.permission !== 'granted' &&
+    Notification.permission !== 'denied'
 }
 </script>

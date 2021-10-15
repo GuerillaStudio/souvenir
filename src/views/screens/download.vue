@@ -96,16 +96,12 @@ export default {
           this.downloadReady = true
 
           if (document.hidden && ('Notification' in window) && Notification.permission === 'granted') {
-            const notification = new Notification('You can now download your souvenir', {
-              body: 'Thank you for your patience.',
-              icon: appLogo
-            })
-
-            notification.addEventListener('click', () => {
-              parent.focus()
-            }, {
-              once: true
-            })
+            navigator.serviceWorker.ready.then((registration) => {
+              registration.showNotification('You can now download your souvenir', {
+                body: 'Thank you for your patience.',
+                icon: appLogo
+              })
+            }).catch(console.error)
           }
         }
       })

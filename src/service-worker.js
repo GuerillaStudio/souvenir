@@ -16,3 +16,17 @@ async function activate () {
 }
 
 addEventListener('activate', e => e.waitUntil(activate()))
+
+addEventListener('notificationclick', event => {
+  event.notification.close()
+
+  event.waitUntil(
+    clients
+      .matchAll({ type: 'window' })
+      .then(clientList => {
+        for (const client of clientList) {
+          return client.focus()
+        }
+      })
+  )
+})
