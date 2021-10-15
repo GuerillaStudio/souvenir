@@ -12,13 +12,11 @@ export async function getCamera (shouldFaceUser) {
 
   for (const constraints of constraintsList) {
     try {
-      console.log(constraints)
       return {
         mediaStream: await navigator.mediaDevices.getUserMedia(constraints),
         facingMode: constraints.video.facingMode.exact ? constraints.video.facingMode.exact : 'unknow'
       }
     } catch (error) {
-      console.log(error)
       if (error.name !== 'OverconstrainedError' && error.constraint === 'facingMode') {
         throw error
       }
