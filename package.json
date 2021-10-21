@@ -4,8 +4,8 @@
   "private": true,
   "license": "Copyleft",
   "scripts": {
-    "serve": "npm run serve-milia",
-    "serve-milia": "parcel src/index.html",
+    "serve": "npm run dev",
+    "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "lint": "eslint --ext .js,vue .",
     "lint-fix": "eslint --ext .js,vue . --fix"
