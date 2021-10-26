@@ -10,7 +10,7 @@
           <li class="welcome-steps__item">Save as a GIF</li>
         </ol>
       </div>
-      <button class="btn btn--primary" @click="startCapture">Let's make a souvenir!</button>
+      <router-link class="btn btn--primary" :to="{ name: 'capture' }">Let's make a souvenir!</router-link>
     </div>
   </layout-default>
 </template>
@@ -22,11 +22,6 @@ export default {
   name: 'welcome',
   components: {
     illuWelcome
-  },
-  methods: {
-    startCapture () {
-      this.$router.push({ name: 'capture' })
-    }
   }
 }
 </script>

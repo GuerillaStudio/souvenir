@@ -1,11 +1,9 @@
 <template lang="html">
   <div class="options">
     <button v-if="backBtn" class="options__btn" @click="backBtn">← back</button>
-    <select v-if="!disabledTime" v-model="selectedTime" class="options__select" @change="updateDuration(duration.selected)">
-      <option v-for="time in duration.list" :key="time" :value="time">
-        {{ timeLabel(time) }}
-      </option>
-    </select>
+    <button v-if="!disabledTime" class="options__btn options__btn--select" title="Time" @click="openTime">
+      {{ selectedTime }}s
+    </button>
     <button v-if="!disabledTimer" class="options__btn" :class="{ 'options__btn--timer': timer }" :data-timer="timer" title="Timer settings" @click="openTimer">
       <icon-timer></icon-timer>
     </button>
@@ -20,6 +18,15 @@
       <button class="option__panelOption option__panelOption--big" :class="{ 'current': timer === 0 }" @click="updateTimer(0)">0s</button>
       <button class="option__panelOption option__panelOption--big" :class="{ 'current': timer === 3 }" @click="updateTimer(3)">3s</button>
       <button class="option__panelOption option__panelOption--big" :class="{ 'current': timer === 10 }" @click="updateTimer(10)">10s</button>
+    </div>
+    <div v-if="!disabledTime" class="options__panel" :class="{ 'active': timeOpen }">
+      <button
+        v-for="time in duration.list"
+        :key="time"
+        class="option__panelOption option__panelOption--big"
+        :class="{ 'current': time === selectedTime }"
+        @click="updateDuration(time)"
+      >{{ time }}s</button>
     </div>
   </div>
 </template>
@@ -40,6 +47,7 @@ export default {
   },
   data: () => ({
     boomerangOpen: false,
+    timeOpen: false,
     timerOpen: false
   }),
   props: {
@@ -72,11 +80,15 @@ export default {
     }
   },
   methods: {
-    timeLabel (time) {
-      return time + 's'
-    },
     updateDuration (time) {
       this.$store.commit('updateDuration', time)
+      this.closeTime()
+    },
+    openTime () {
+      this.timeOpen = true
+    },
+    closeTime () {
+      this.timeOpen = false
     },
     openBoomerang () {
       this.boomerangOpen = true
@@ -98,7 +110,6 @@ export default {
       this.$store.commit('updateTimer', value)
       this.closeTimer()
     }
-
   }
 }
 </script>

@@ -17,7 +17,6 @@
   padding: 2.2rem .2rem;
 }
 
-.options__select,
 .options__btn {
   appearance: none;
   margin: 0;
@@ -30,21 +29,20 @@
   cursor: pointer;
 }
 
-.options__select:focus,
 .options__btn:focus {
   outline: none;
   box-shadow: var(--focus-ring);
 }
 
-.options__select {
-  padding-right: 4.4rem;
-  background: url("~/src/assets/img/ico-arrow.svg") no-repeat;
-  background-position: calc(100% - 2rem) center;
-}
-
 .options__btn svg {
   vertical-align: middle;
   line-height: 1;
+}
+
+.options__btn--select {
+  padding-right: 4.4rem;
+  background: url("~/src/assets/img/ico-arrow.svg") no-repeat;
+  background-position: calc(100% - 2rem) center;
 }
 
 .options__btn--check {
