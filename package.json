@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "license": "Copyleft",
+  "engines": {
+    "node": "^12.0.0"
+  },
   "scripts": {
     "serve": "npm run serve-milia",
     "serve-milia": "parcel src/index.html",
