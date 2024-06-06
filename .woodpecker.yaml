@@ -1,0 +1,24 @@
+steps:
+  - name: build
+    image: node:12.18.0
+    commands:
+      - npm ci
+      - npm run build -- --public-url https://souvenir.cam
+
+  - name: upload
+    when:
+      branch:
+        - main
+    image: plugins/s3
+    settings:
+      bucket: souvenir.cam
+      endpoint: https://garage.deuxfleurs.fr
+      region: garage
+      access_key:
+        from_secret: aws_access_key_id
+      secret_key:
+        from_secret: aws_secret_access_key
+      source: dist/**/*
+      target: /
+      strip_prefix: dist/
+      path_style: true
