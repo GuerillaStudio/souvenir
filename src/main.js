@@ -25,7 +25,7 @@ console.log(`%c
   └─┐│ ││ │└┐┌┘├┤ ││││├┬┘
   └─┘└─┘└─┘ └┘ └─┘┘└┘┴┴└─
 
-  Oh hi! If you're looking for the source code, It's here: https://github.com/GuerillaHQ/souvenir
+  Oh hi! If you're looking for the source code, It's here: https://github.com/GuerillaHQ/souvenir (or also here https://git.deuxfleurs.fr/GuerillaHQ/souvenir)
 
   Have fun 💜
 
