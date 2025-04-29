@@ -7,26 +7,32 @@
 -------------------------------------------------------------- */
 
 .options {
+  --options-outline: .2rem;
+  --options-padding: 2rem;
+  --options-height: calc((var(--options-padding) + var(--options-outline)) * 5); /* 5= 1(btns lh) + 2(btns padding) + 2(panel padding) */
+  --options-height: calc(((var(--options-padding) + var(--options-outline)) * 5) + env(safe-area-inset-top));
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  margin-right: -.2rem;
-  margin-left: -.2rem;
-  padding: 2.2rem .2rem;
+  margin-right: calc(-1 * var(--options-outline));
+  margin-left: calc(-1 * var(--options-outline));
+  padding: calc(var(--options-padding) + var(--options-outline)) var(--options-outline);
+  margin-top: calc(-1 * env(safe-area-inset-top));
+  padding-top: calc(var(--options-padding) + var(--options-outline) + env(safe-area-inset-top));
 }
 
 .options__select,
 .options__btn {
   appearance: none;
   margin: 0;
-  padding: 2rem;
+  padding: var(--options-padding);
   border: .1rem solid transparent;
   border-radius: .3rem;
   background: transparent;
   color: #fff;
-  line-height: 2.2rem;
+  line-height: calc(var(--options-padding) + var(--options-outline));
   cursor: pointer;
 }
 
@@ -37,9 +43,9 @@
 }
 
 .options__select {
-  padding-right: 4.4rem;
+  padding-right: calc((var(--options-padding) + var(--options-outline)) * 2);
   background: url("/assets/img/ico-arrow.svg") no-repeat;
-  background-position: calc(100% - 2rem) center;
+  background-position: calc(100% - var(--options-padding)) center;
 }
 
 .options__btn svg {
@@ -97,16 +103,17 @@
 
 .options__panel {
   position: absolute;
-  top: 2.2rem;
-  bottom: 2.2rem;
+  top: calc(var(--options-padding) + var(--options-outline));
+  top: calc(var(--options-padding) + var(--options-outline) + env(safe-area-inset-top));
+  bottom: calc(var(--options-padding) + var(--options-outline));
   left: 0;
   display: flex;
   overflow: hidden;
   width: 100%;
   border-radius: .3rem;
   background-color: #4c4981;
-  transition: 300ms transform;
-  transform: translateY(-9rem);
+  transition: 200ms transform;
+  transform: translateY(calc(-1 * var(--options-height)));
 }
 
 .options__panel.active {

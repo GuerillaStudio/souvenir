@@ -8,6 +8,7 @@
   bottom: 0;
   left: 0;
   padding: 2rem 4rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom));
   background-color: #42b983;
   color: #fff;
   text-align: center;

@@ -7,9 +7,13 @@
 
 :root {
   --color-primary: #dd28d3;
+  --color-primary--hsl: 303 73% 51%;
   --color-secondary: #8420a7;
+  --color-secondary--hsl: 284 68% 39%;
   --color-tertiary: #212045;
+  --color-tertiary--hsl: 242 37% 20%;
   --color-info: #2185d0;
+  --color-info--hsl: 206 73% 47%;
 }
 
 /* texts

@@ -36,6 +36,7 @@
   margin-right: auto;
   margin-left: auto;
   padding-top: 7rem;
+  padding-top: calc(7rem + env(safe-area-inset-top));
   max-width: calc(100% - 2rem);
   width: 32rem;
 }
@@ -64,6 +65,7 @@
 .layoutOverlay-content {
   padding-top: 2rem;
   padding-bottom: 4rem;
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom));
 }
 
 .layoutOverlay-title {

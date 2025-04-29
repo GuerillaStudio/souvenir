@@ -7,4 +7,5 @@
   flex-grow: 1;
   max-width: 100%;
   text-align: center;
+  padding-bottom: env(safe-area-inset-bottom);
 }
