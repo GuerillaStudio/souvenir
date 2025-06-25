@@ -1,3 +1,7 @@
+when:
+  - event: [tag, push, release, deployment, cron, manual]
+    branch: [main]
+
 steps:
   - name: build
     image: node:12.18.0
@@ -22,3 +26,4 @@ steps:
       target: /
       strip_prefix: dist/
       path_style: true
+      overwrite: true
